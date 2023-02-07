@@ -66,13 +66,13 @@ create table IF NOT EXISTS imageobjet
 ) ENGINE=InnoDB DEFAULT CHARSET="utf8";
 insert into imageobjet (idobjet, urlimage) values (1, 'assets/img/dvd1.png');
 insert into imageobjet (idobjet, urlimage) values (1, 'assets/img/dvd2.jpg');
-insert into imageobjet (idobjet, urlimage) values (2, 'assets/img/tshirt1.jpg');
-insert into imageobjet (idobjet, urlimage) values (3, 'assets/img/figurine1.png');
-insert into imageobjet (idobjet, urlimage) values (4, 'assets/img/figurine2.jpg');
-insert into imageobjet (idobjet, urlimage) values (5, 'assets/img/usbhub1,png');
-insert into imageobjet (idobjet, urlimage) values (6, 'assets/img/dvd3.jpg');
-insert into imageobjet (idobjet, urlimage) values (7, 'assets/img/souris.jpg');
-insert into imageobjet (idobjet, urlimage) values (8, 'assets/img/souris1.jpg');
+insert into imageobjet (idobjet, urlimage) values (2, 'assets/img/dvd3.jpg');
+insert into imageobjet (idobjet, urlimage) values (3, 'assets/img/tshirt1.jpg');
+insert into imageobjet (idobjet, urlimage) values (4, 'assets/img/figurine1.png');
+insert into imageobjet (idobjet, urlimage) values (5, 'assets/img/figurine2.jpg');
+insert into imageobjet (idobjet, urlimage) values (6, 'assets/img/usbhub1,png');
+insert into imageobjet (idobjet, urlimage) values (7, 'assets/img/dvd3.jpg');
+insert into imageobjet (idobjet, urlimage) values (8, 'assets/img/souris.jpg');
 insert into imageobjet (idobjet, urlimage) values (9, 'assets/img/pantalon1.png');
 insert into imageobjet (idobjet, urlimage) values (9, 'assets/img/pantalon2.png');
 insert into imageobjet (idobjet, urlimage) values (9, 'assets/img/pantalon4.jpg');
@@ -99,7 +99,5 @@ insert into echange (idobjetorigine, idobjetcible, idproprioorigine, idpropriono
 insert into echange (idobjetorigine, idobjetcible, idproprioorigine, idproprionouveau, dateechange, etat) values (8, 9, 2, 4, current_date(), 'confirme');
 insert into echange (idobjetorigine, idobjetcible, idproprioorigine, idproprionouveau, dateechange, etat) values (6, 1, 3, 2, current_date(), 'attente');
 
-create or replace view v_objet_categorie as select * from objet natural join categorie;
-
-create or replace view v_objet_image_objet as select * from objet natural join imageobjet;
+create or replace view v_objet_image_categorie as select * from objet natural join categorie natural join imageobjet;
 --test
