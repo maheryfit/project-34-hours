@@ -99,3 +99,5 @@ insert into echange (idobjetorigine, idobjetcible, idproprioorigine, idpropriono
 insert into echange (idobjetorigine, idobjetcible, idproprioorigine, idproprionouveau, dateechange, etat) values (6, 1, 3, 2, current_date(), 'attente');
 
 create or replace view v_objet_categorie as select * from objet natural join categorie;
+
+--test
