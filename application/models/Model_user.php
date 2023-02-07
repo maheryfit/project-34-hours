@@ -147,7 +147,7 @@ class Model_user extends CI_Model
 
     public function get_liste_objet_autres($idProprietaire) {
         $tab = array();
-        $request = "SELECT * from v_categorie_objet where idproprietaire != %d";
+        $request = "SELECT * from v_objet_categorie where idproprietaire != %d";
         $request = sprintf($request,$this->db->escape($idProprietaire));
         $query = $this->db->query($request);
         foreach ($query->result_array() as $row) {
@@ -183,6 +183,82 @@ class Model_user extends CI_Model
         $request = sprintf($request, $this->db->escape($idechange) );
         $this->db->query($request);
     }
+
+    public function get_objetImage() {
+        $tab = array();
+        $request = "SELECT * from v_objet_image_objet";
+        $query = $this->db->query($request);
+        foreach ($query->result_array() as $row) {
+            array_push($tab, $row);
+        }
+    return $tab;
+    }
+
+    public function rechercheObjet($motcle, $idcategorie) {
+        $tab = array();
+        $request = "SELECT * from objet  where nom like %s and idcategorie = %d";
+        if($idcategorie == 0) {
+            $request = "SELECT * from objet  where nom like %s";
+            $request = sprintf($request, $this->db->escape($motcle));
+        }
+        else {
+            $request = sprintf($request, $this->db->escape($motcle),$this->db->escape($idcategorie));
+        }
+        $query = $this->db->query($request);
+        foreach ($query->result_array() as $row) {
+            array_push($tab, $row);
+        }
+    return $tab;
+    }
+
+    public function get_histroriqueObjet($idobjet) {
+        $tab = array();
+        $request = "SELECT * from echange where ( idobjetorigine = %d or idobjetcible = %d ) and etat = 'confirme'";
+        $request = sprintf($request, $this->db->escape($idobjet), $this->db->escape($idobjet));
+        $query = $this->db->query($request);
+        foreach ($query->result_array() as $row) {
+            array_push($tab, $row);
+        }
+    return $tab;
+    }
+
+    public function countEchange ($mois, $anne) {
+        $val = 0;
+        $request = "SELECT count(*) AS isa FROM echange WHERE MONTH(dateechange) = %d and YEAR(dateechange) = %d";
+        $request = sprintf($request, $this->db->escape($mois) , $this->db->escape($anne));
+        $query = $this->db->query($request);
+        $row = $query->row();
+        if(isset($row)) {
+            $val = $row->isa;
+        }
+    return $val;
+    }
+
+    public function getEchangeBetween($anne,$moisdebut,$moisfin) {
+        $val = array();
+        $donne = array();
+        if($moisdebut <= $moisfin) {
+            for($i = (int)$moisdebut; $i<=(int)$moisfin; $i++) {
+                //format fantarty ny base dd-mm--yy
+                //echo($i."</br>");
+                $moisTofindoccupation = $i; 
+                $donne[0] = $moisTofindoccupation;
+                $donne[1] = $this->countEchange($moisTofindoccupation, $anne);
+                array_push($val,$donne);  
+            }
+        }
+        else {
+            echo "mois debut infeerieur a mois fin";
+        }
+    return $val;
+    }
+
+    public function countInsrcription($mois, $anne) {
+        
+    }
+
+
+
 
     
     

@@ -1,5 +1,5 @@
-create database web_s3_takalo;
-use web_s3_takalo;
+-- create database web_s3_takalo;
+-- use web_s3_takalo;
 
 create table IF NOT EXISTS utilisateur
 (
