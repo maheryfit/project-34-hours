@@ -105,6 +105,24 @@ class Model_user extends CI_Model
     return $tab;
     }
 
+    public function modifierObjetSimple($idobjet, $titre, $description, $prix){
+        if($prix < 0) {
+            echo "prix invalid";
+        }
+        else {
+            $request = "UPDATE objet set titre = '%s', description = '%s', prix = %d where idobjet = %d";
+            $titre = $this->db->escape($titre);
+            $description = $this->db->escape($description);
+            $prix = $this->db->escape($prix);
+            $idobjet = $this->db->escape($idobjet);
+            $request = sprintf($request, $titre, $description, $prix, $idobjet );
+            $this->db->query($request);
+        }
+        
+    }
+
+
+
 
 
 
