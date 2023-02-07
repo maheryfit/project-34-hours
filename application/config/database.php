@@ -74,12 +74,12 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> 'pgsql:host=localhost;port=5432;dbname=depense_maison',
+	'dsn'	=> 'mysql:host=localhost; dbname=takalo; port=3306 ; charset=utf8;',
 	'hostname' => 'localhost',
-	'username' => 'maison',
-	'password' => 'root',
-	'database' => 'depense_maison',
-	'dbdriver' => 'pdo',	/*ou postgre */
+	'username' => 'root',
+	'password' => '',
+	'database' => 'sakila',
+	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
