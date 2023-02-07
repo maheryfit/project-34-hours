@@ -97,7 +97,7 @@ class Model_user extends CI_Model
 
     public function getlistemesobjet($idProprietaire){
         $tab = array();
-        $request = "SELECT * from v_objet_categorie where idproprietaire = %s";
+        $request = "SELECT * from v_objet_image_objet where idproprietaire = %s";
         $request = sprintf($request,$this->db->escape($idProprietaire));
         $query = $this->db->query($request);
         foreach ($query->result_array() as $row) {
@@ -147,7 +147,7 @@ class Model_user extends CI_Model
 
     public function get_liste_objet_autres($idProprietaire) {
         $tab = array();
-        $request = "SELECT * from v_objet_categorie where idproprietaire != %s";
+        $request = "SELECT * from v_objet_image_objet where idproprietaire != %s";
         $request = sprintf($request,$this->db->escape($idProprietaire));
         $query = $this->db->query($request);
         foreach ($query->result_array() as $row) {
@@ -164,12 +164,26 @@ class Model_user extends CI_Model
         $idproprionouveau = $this->db->escape($idproprionouveau);
         $request = sprintf($request, $idobjetorigine, $idobjetcible, $idproprioorigine, $idproprionouveau );
         $this->db->query($request);
-    }  
+    } 
+    
+    public function get_echangeById($idechange) {
+        $request = "SELECT * from echange where idechange = %s";
+        $request = sprintf($request, $this->db->escape($idechange));
+        $query = $this->db->query($request);
+        $row = $query->row();
+    return $row;
+    }
 
     public function accepter_proposition($idechange){
         $request = "UPDATE echange set etat = 'confirme' where idechange = %s";
         $request = sprintf($request, $this->db->escape($idechange) );
+        $echange = $this->get_echangeById($idechange);
+        $idobj1 = $this->db->escape( $echange->idobjetorigine );
+        $idobj2 = $this->db->escape( $echange->idobjetcible );
+        $request1 = "UPDATE SET echange set etat ='annule' where (idobjetorigine = %s or idobjetcible = %s) and idechange != %s ";
+        $repuest1 = sprintf($request1, $idobj1, $idobj2, $this->db->escape($idechange));
         $this->db->query($request);
+        $this->db->query($repuest1);
     }
 
     public function refuser_proposition($idechange){
@@ -187,6 +201,17 @@ class Model_user extends CI_Model
     public function get_objetImage() {
         $tab = array();
         $request = "SELECT * from v_objet_image_objet";
+        $query = $this->db->query($request);
+        foreach ($query->result_array() as $row) {
+            array_push($tab, $row);
+        }
+    return $tab;
+    }
+
+    public function get_objetImageById($idobjet) {
+        $tab = array();
+        $request = "SELECT * from v_objet_image_objet where idobjet = %s";
+        $request = sprintf($request, $this->db->escape($idobjet));
         $query = $this->db->query($request);
         foreach ($query->result_array() as $row) {
             array_push($tab, $row);
