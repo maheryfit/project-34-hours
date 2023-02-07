@@ -254,7 +254,34 @@ class Model_user extends CI_Model
     }
 
     public function countInsrcription($mois, $anne) {
-        
+        $val = 0;
+        $request = "SELECT count(*) AS isa FROM utilisateur WHERE MONTH(dateechange) = %d and YEAR(dateinscription) = %d";
+        $request = sprintf($request, $this->db->escape($mois) , $this->db->escape($anne));
+        $query = $this->db->query($request);
+        $row = $query->row();
+        if(isset($row)) {
+            $val = $row->isa;
+        }
+    return $val;
+    }
+
+    public function getInscriptionBetween($anne,$moisdebut,$moisfin) {
+        $val = array();
+        $donne = array();
+        if($moisdebut <= $moisfin) {
+            for($i = (int)$moisdebut; $i<=(int)$moisfin; $i++) {
+                //format fantarty ny base dd-mm--yy
+                //echo($i."</br>");
+                $moisTofindoccupation = $i; 
+                $donne[0] = $moisTofindoccupation;
+                $donne[1] = $this->countInsrcription($moisTofindoccupation, $anne);
+                array_push($val,$donne);  
+            }
+        }
+        else {
+            echo "mois debut infeerieur a mois fin";
+        }
+    return $val;
     }
 
 
