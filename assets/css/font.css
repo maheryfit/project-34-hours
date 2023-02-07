@@ -1,0 +1,21 @@
+@font-face {
+    font-family: 'Metropolis';
+    src: url("/assets/fonts/Metropolis-Regular.otf");
+}
+
+*, *:before, *:after {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Metropolis', sans-serif !important;
+}
+
+img {
+    object-fit: cover;
+}
+
+a {
+    color: var(--black);
+    text-decoration: none !important;
+}
+
+a:hover {
+    color: var(--black);
+} 
