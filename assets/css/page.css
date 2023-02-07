@@ -1,0 +1,31 @@
+.btn[id="discard"] {
+    border: 1px solid var(--black);
+    color: var(--black);
+}
+
+.btn[id="discard"]:hover {
+    background-color: var(--black);
+    color: var(--white);
+}
+
+.card-text span {
+    color: var(--primary-color);
+}
+
+a {
+    transition: all 0.5s ease-out;
+}
+
+a:hover {
+    color: var(--secondary-color);
+} 
+
+.btn-link {
+    background-color: var(--submit);
+    color: var(--white);
+}
+
+.btn-link:hover {
+    background-color: var(--submit-hover);
+    color: var(--white);
+}
