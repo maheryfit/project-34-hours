@@ -99,7 +99,7 @@ class Controlleur_user extends CI_Controller {
 
             $dataliste['pages'] = "accueil-client";
 
-            $this->load->view('form-template', $dataliste);
+            $this->load->view('pages-template-client', $dataliste);
 		}
 		elseif ((!isset($nom))||(!isset($mail))||(!isset($mdp))) 
 		{
@@ -124,7 +124,7 @@ class Controlleur_user extends CI_Controller {
                 $dataliste['title'] = "Gestion categorie";
                 $dataliste['pages'] = "accueil-admin";
 
-		        $this->load->view('form-template');
+		        $this->load->view('pages-template-admin');
 			}
 			else
 			{
@@ -144,7 +144,7 @@ class Controlleur_user extends CI_Controller {
         $dataliste['title'] = "Gestion categorie";
         $dataliste['pages'] = "accueil-admin";
 
-        $this->load->view('form-template', $dataliste);
+        $this->load->view('pages-template-admin', $dataliste);
     }
 
     public function traitement_insertion_categorie()
@@ -155,16 +155,16 @@ class Controlleur_user extends CI_Controller {
 
         if ($nom != null)
 		{
-            $categorieefamisy = $this->user_model->getCategoriebyNom($nom);
+            $categorieefamisy = $this->model_user->getCategoriebyNom($nom);
 			if(sizeof($categorieefamisy)==0)
 			{   
                 echo "Ajout categorie effectué";
-                $this->user_model->insertionCategorie($nom);
+                $this->model_user->insertionCategorie($nom);
                 $dataliste['listecategories'] = $this->model_user->get_listCategories();
                 $dataliste['title'] = "Gestion categorie";
                 $dataliste['pages'] = "accueil-admin";
 
-		        $this->load->view('form-template', $dataliste);
+		        $this->load->view('pages-template-admin', $dataliste);
 			}
 			else
 			{
@@ -190,7 +190,7 @@ class Controlleur_user extends CI_Controller {
 
         $dataliste['pages'] = "accueil-client";
 
-        $this->load->view('form-template', $dataliste);
+        $this->load->view('pages-template-client', $dataliste);
     }
 
     public function vers_fiche_unique_objet()
@@ -199,12 +199,13 @@ class Controlleur_user extends CI_Controller {
         $idobjet = $this->input->get('idobjet');
 
         $dataobjet['objetspecifie'] = $this->model_user->getobjetbyid($idobjet);
+        //ty atao anaty input hidden rehefa tonga anatinle vue dia passena rehefa anao modification objet
         $dataobjet['title'] = "Modification d'un objet";
         // $dataliste['title'] = $iduseractuel;
         $dataobjet['imagesobjet'] = $this->model_user->getobjetimage($idobjet);
         $dataobjet['pages'] = "modification-objet";
 
-        $this->load->view('form-template', $dataobjet);
+        $this->load->view('pages-template-client', $dataobjet);
     }
 
     public function traitement_suppression_image()
@@ -216,10 +217,10 @@ class Controlleur_user extends CI_Controller {
         $dataobjet['title'] = "Modification d'un objet";
         // $dataliste['title'] = $iduseractuel;
         $dataobjet['imagesobjet'] = $this->model_user->getobjetimage($idobjet);
-        $this->model->suppression_objet_image($idobjetimage);
+        $this->model_user->suppression_objet_image($idobjetimage);
         $dataobjet['pages'] = "modification-objet";
 
-        $this->load->view('form-template', $dataobjet);
+        $this->load->view('pages-template-client', $dataobjet);
     }
 
     public function traitement_ajout_image()
@@ -231,24 +232,70 @@ class Controlleur_user extends CI_Controller {
         $dataobjet['title'] = "Modification d'un objet";
         // $dataliste['title'] = $iduseractuel;
         $dataobjet['imagesobjet'] = $this->model_user->getobjetimage($idobjet);
-        $this->model->suppression_objet_image($idobjetimage);
+        $this->model_user->suppression_objet_image($idobjetimage);
         $dataobjet['pages'] = "modification-objet";
 
-        $this->load->view('form-template', $dataobjet);
+        $this->load->view('pages-template-client', $dataobjet);
     }
 
-	public function about()
+    public function traitement_modification_objet()
     {
-        //definition des donnees variables du template
-        $data['title'] = 'Le titre de la page';
-        $data['description'] = 'La description de la page pour les moteurs de recherche';
-        $data['keywords'] = 'les, mots, clés, de, la, page';
+        $this->load->model('model_user');
+        $idobjet = $this->input->get('idobjet');
+        $titre = $this->input->post('titre');
+        $description = $this->input->post('description');
+        $prix = $this->input->post('prix');
 
-        //on charge la view qui contient le corps de la page
-        $data['contents']='welcome_message';
-		//on charge la page dans le template
-        $this->load->view('templates/template', $data);
-       
+        $this->model_user->modifierObjetSimple($idobjet, $titre, $description, $prix);
+
+        $dataobjet['objetspecifie'] = $this->model_user->getobjetbyid($idobjet);
+        //ty atao anaty input hidden rehefa tonga anatinle vue dia passena rehefa anao modification objet
+        $dataobjet['title'] = "Modification d'un objet";
+        // $dataliste['title'] = $iduseractuel;
+        $dataobjet['imagesobjet'] = $this->model_user->getobjetimage($idobjet);
+        $dataobjet['pages'] = "modification-objet";
+
+        $this->load->view('pages-template-client', $dataobjet);
+    }
+
+    public function vers_liste_objet_autres()
+    {
+        $this->load->model('model_user');
+        
+        $iduseractuel = $this->session->idutilisateur;
+        
+        $dataobjet['title'] = "Liste des objets des autres clients";
+        // $dataliste['title'] = $iduseractuel;
+        $dataobjet['objetdesautres'] = $this->model_user->get_liste_objet_autres($iduseractuel);
+        $dataobjet['pages'] = "liste-objet-autres";
+
+        $this->load->view('pages-template-client', $dataobjet);
+    }
+
+    public function vers_proposition_echange()
+    {
+        $this->load->model('model_user');
+        
+        $iduseractuel = $this->session->idutilisateur;
+        $idobjetcible = $this->input->post('idobjetcible');
+
+        $dataobjet['title'] = "Interface proposition echange";
+        // $dataliste['title'] = $iduseractuel;
+        $dataobjet['mesobjets'] = $this->model_user->getlistemesobjets($iduseractuel);
+        $dataobjet['objetcible'] = $this->model_user->getobjetimagebyid($idobjetcible);
+        $dataobjet['pages'] = "proposition-echange";
+
+        $this->load->view('pages-template-client', $dataobjet);
+    }
+
+    public function traitement_proposition_echange()
+    {
+        $this->load->model('model_user');
+        
+        $iduseractuel = $this->session->idutilisateur;
+        $idobjetcible = $this->input->post('idobjetcible');
+
+        
     }
 
 	public function redirectindex()

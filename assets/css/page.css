@@ -3,6 +3,16 @@
     color: var(--black);
 }
 
+.btn[type="submit"] {
+    background-color: var(--submit);
+    color: var(--white);
+}
+
+.btn[type="submit"]:hover {
+    background-color: var(--submit-hover);
+    color: var(--white);
+}
+
 .btn[id="discard"]:hover {
     background-color: var(--black);
     color: var(--white);

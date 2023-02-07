@@ -1,9 +1,8 @@
-        <footer class="text-center">
+<footer class="text-center">
             <div class="container text-muted py-4 py-lg-5">
                 <ul class="list-inline">
                     <li class="list-inline-item me-4"><a class="link-secondary text-uppercase" href="#">Home</a></li>
-                    <li class="list-inline-item me-4"><a class="link-secondary text-uppercase" href="#">Gestion d'échange</a></li>
-                    <li class="list-inline-item"><a class="link-secondary text-uppercase" href="#">Listes des objets</a></li>
+                    <li class="list-inline-item me-4"><a class="link-secondary text-uppercase" href="#">Gestion de catégories</a></li>
                 </ul>
                 <ul class="list-inline">
                     <li class="list-inline-item me-4"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-facebook">
@@ -24,6 +23,8 @@
             </div>
         </footer>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+    <script src="<?php echo site_url('assets/js/Lightbox-Gallery.js'); ?>"></script>
     <script src="<?php echo site_url('assets/bootstrap/js/bootstrap.min.js'); ?>"></script>
 </body>
 </html>
