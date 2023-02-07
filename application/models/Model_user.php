@@ -306,7 +306,7 @@ class Model_user extends CI_Model
         else {
             echo "mois debut infeerieur a mois fin";
         }
-    return $val;
+        return $val;
     }
 
 

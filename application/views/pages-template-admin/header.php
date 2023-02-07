@@ -15,7 +15,7 @@
     <nav class="navbar navbar-light navbar-expand-md py-3">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" style="width: 10rem;" href="#">
-                <img src="assets/Takalo-logo/default.png" alt="Picture not found" width="40%">
+                <img src="<?php echo site_url('assets/Takalo-logo/default.png'); ?>" alt="Picture not found" width="40%">
             </a>
             <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-3">
                 <span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span>
