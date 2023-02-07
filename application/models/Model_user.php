@@ -5,7 +5,7 @@ class Model_user extends CI_Model
 {
     
     public function verify_Login($nom,$mail,$mdp) {
-        $user = array();
+        $tab = array();
         $request = "SELECT * from utilisateur where nom = '%s' or mail = '%s'";
         $request = sprintf($request,$this->db->escape($nom), $this->db->escape($mail));
         $query = $this->db->query($request);
@@ -25,8 +25,50 @@ class Model_user extends CI_Model
 
     public function inscription($nom, $mail, $mdp, $isAdmin) {
         $request = "INSERT INTO utilisateur VALUES (NULL,'%s','%s','%s',%d)";
-        $query = $this->db->query($request);
+        $this->db->query($request);
     }
+
+    public function get_ListePropositionPerso($idproprioorigine){
+        $tab = array();
+        $request = "SELECT * from echange where idproprioorigine = '%s'";
+        $request = sprintf($request,$this->db->escape($idproprioorigine));
+        $query = $this->db->query($request);
+        foreach ($query->result_array() as $row) {
+            array_push($tab, $row);
+        }
+    return $tab;
+    }
+
+    public function get_ListePropositionAutres($idproprionouveau){
+        $tab = array();
+        $request = "SELECT * from echange where idproprionouveau = '%s'";
+        $request = sprintf($request,$this->db->escape($idproprionouveau));
+        $query = $this->db->query($request);
+        foreach ($query->result_array() as $row) {
+            array_push($tab, $row);
+        }
+    return $tab;
+    }
+
+    public function get_NomObjById($idobjet) {
+        $tab = array();
+        $request = "SELECT * from objet where idobjet = '%s'";
+        $request = sprintf($request,$this->db->escape($idobjet));
+        $query = $this->db->query($request);
+        $row = $query->row();
+    return $row->nom;
+    }
+
+    public function get_UtilisateurById($id) {
+        $tab = array();
+        $request = "SELECT * from utilisateur where idutilisateur = '%s'";
+        $request = sprintf($request,$this->db->escape($id));
+        $query = $this->db->query($request);
+        $row = $query->row();
+    return $row->nom;
+    }
+
+
 
    
 
