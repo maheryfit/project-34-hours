@@ -25,6 +25,7 @@ class Model_user extends CI_Model
 
     public function inscription($nom, $mail, $mdp, $isAdmin) {
         $request = "INSERT INTO utilisateur VALUES (NULL,'%s','%s','%s',%d)";
+        $request = sprintf($request, $this->db->escape($nom), $this->db->escape($mail), $this->db->escape($mdp), $this->db->escape($isAdmin) );
         $this->db->query($request);
     }
 
@@ -60,13 +61,32 @@ class Model_user extends CI_Model
     }
 
     public function get_UtilisateurById($id) {
-        $tab = array();
         $request = "SELECT * from utilisateur where idutilisateur = '%s'";
         $request = sprintf($request,$this->db->escape($id));
         $query = $this->db->query($request);
         $row = $query->row();
     return $row->nom;
     }
+
+    public function get_listCategories() {
+        $tab = array();
+        $request = "SELECT * from catecorie";
+        $query = $this->db->query($request);
+        foreach ($query->result_array() as $row) {
+            array_push($tab, $row);
+        }
+    return $tab;
+    }
+
+    public function insertionCategorie($categorie){
+        $request = "INSERT INTO categorie VALUES (NULL,'%s')";
+        $request = sprintf($request, $this->db->escape($categorie));
+        $this->db->query($request);
+    }
+
+    
+
+
 
 
 
