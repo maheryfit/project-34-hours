@@ -5,15 +5,15 @@ class Model_user extends CI_Model
 {
     
     public function verify_Login($nom,$mail,$mdp) {
-        $tab = array();
+        $val = 'not_found';
         $request = "SELECT * from utilisateur where (nom = '%s' or mail = '%s') and motdepasse = '%s'";
         $request = sprintf($request,$this->db->escape($nom), $this->db->escape($mail), $this->db->escape($mdp));
         $query = $this->db->query($request);
         $row = $query->row();
         if(isset($row)) {
-            return true;
+            $val = $row->idutilisateur;
         }
-    return false;
+    return $val;
     }
 
     public function inscription($nom, $mail, $mdp) {
@@ -155,7 +155,29 @@ class Model_user extends CI_Model
         $idproprionouveau = $this->db->escape($idproprionouveau);
         $request = sprintf($request, $idobjetorigine, $idobjetcible, $idproprioorigine, $idproprionouveau );
         $this->db->query($request);
-    }    
+    }  
+
+    public function accepter_proposition($idechange){
+        $request = "UPDATE echange set etat = 'confirme' where idechange = %d";
+        $request = sprintf($request, $this->db->escape($idechange) );
+        $this->db->query($request);
+    }
+
+    public function refuser_proposition($idechange){
+        $request = "UPDATE echange set etat = 'refus' where idechange = %d";
+        $request = sprintf($request, $this->db->escape($idechange) );
+        $this->db->query($request);
+    }
+
+    public function annuler_proposition($idechange){
+        $request = "UPDATE echange set etat = 'annule' where idechange = %d";
+        $request = sprintf($request, $this->db->escape($idechange) );
+        $this->db->query($request);
+    }
+
+    
+    
+    
 
 
 
