@@ -98,6 +98,7 @@ class Model_user extends CI_Model
     public function getobjetbyid($idobjet){
         $tab = array();
         $request = "SELECT * from objet where idobjet = %d";
+        $request = sprintf($request, $this->db->escape($idobjet) );
         $query = $this->db->query($request);
         foreach ($query->result_array() as $row) {
             array_push($tab, $row);
