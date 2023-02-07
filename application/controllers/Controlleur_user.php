@@ -277,11 +277,11 @@ class Controlleur_user extends CI_Controller {
         $this->load->model('model_user');
         
         $iduseractuel = $this->session->idutilisateur;
-        $idobjetcible = $this->input->post('idobjetcible');
+        $idobjetcible = $this->input->get('idobjetcible');
 
         $dataobjet['title'] = "Interface proposition echange";
         // $dataliste['title'] = $iduseractuel;
-        $dataobjet['mesobjets'] = $this->model_user->getlistemesobjets($iduseractuel);
+        $dataobjet['objetdesautres'] = $this->model_user->get_liste_objet_autres($iduseractuel);
         $dataobjet['objetcible'] = $this->model_user->getobjetimagebyid($idobjetcible);
         $dataobjet['pages'] = "proposition-echange";
 
@@ -294,8 +294,14 @@ class Controlleur_user extends CI_Controller {
         
         $iduseractuel = $this->session->idutilisateur;
         $idobjetcible = $this->input->post('idobjetcible');
+        $idobjetorigine = $this->input->post('idobjetorigine');
+        $dataobjet['mesobjets'] = $this->model_user->getlistemesobjets($iduseractuel);
+        $this->model_user->proposer_echange($idobjetorigine, $idobjetcible, $iduseractuel, $idobjetorigine);
+        $dataobjet['pages'] = "proposition-echange";
 
-        
+        $this->load->view('pages-template-client', $dataobjet);
+
+
     }
 
 	public function redirectindex()
