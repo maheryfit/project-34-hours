@@ -23,9 +23,9 @@ class Model_user extends CI_Model
     return false;
     }
 
-    public function inscription($nom, $mail, $mdp, $isAdmin) {
-        $request = "INSERT INTO utilisateur VALUES (NULL,'%s','%s','%s',%d)";
-        $request = sprintf($request, $this->db->escape($nom), $this->db->escape($mail), $this->db->escape($mdp), $this->db->escape($isAdmin) );
+    public function inscription($nom, $mail, $mdp) {
+        $request = "INSERT INTO utilisateur VALUES (NULL,'%s','%s','%s',0)";
+        $request = sprintf($request, $this->db->escape($nom), $this->db->escape($mail), $this->db->escape($mdp));
         $this->db->query($request);
     }
 
@@ -121,6 +121,35 @@ class Model_user extends CI_Model
         }
         
     }
+
+    public function suppresionImageObjet($idobjet){
+        $request = "DELETE FROM imageobjet VALUES where idobjet = %d";
+        $request = sprintf($request, $this->db->escape($idobjet) );
+        $this->db->query($request);
+    }
+
+    public function ajouterImageObjet($idobjet,$urlimage){
+        $request = "INSERT INTO imageobjet values( NULL, %d, '%s')";
+        $request = sprintf($request, $this->db->escape($idobjet), $this->db->escape($urlimage) );
+        $this->db->query($request);
+    }
+
+    public function get_liste_objet_autres($idProprietaire) {
+        $tab = array();
+        $request = "SELECT * from v_categorie_objet where idproprietaire != %d";
+        $request = sprintf($request,$this->db->escape($idProprietaire));
+        $query = $this->db->query($request);
+        foreach ($query->result_array() as $row) {
+            array_push($tab, $row);
+        }
+    return $tab;
+    }
+
+
+
+    
+
+
 
 
 
