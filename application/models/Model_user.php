@@ -6,19 +6,12 @@ class Model_user extends CI_Model
     
     public function verify_Login($nom,$mail,$mdp) {
         $tab = array();
-        $request = "SELECT * from utilisateur where nom = '%s' or mail = '%s'";
-        $request = sprintf($request,$this->db->escape($nom), $this->db->escape($mail));
+        $request = "SELECT * from utilisateur where nom = '%s' or mail = '%s' and motdepasse = '%s'";
+        $request = sprintf($request,$this->db->escape($nom), $this->db->escape($mail), $this->db->escape($mdp));
         $query = $this->db->query($request);
-        foreach ($query->result_array() as $row) {
-            array_push($tab, $row);
-        }
-        if(count($tab) == 0)  {
-            return false;
-        }  
-        else {
-            if($tab[0]['mdp'] == $mdp) {
-                return true;
-            }
+        $row = $query->row();
+        if(isset($row)) {
+            return true;
         }
     return false;
     }
@@ -29,7 +22,7 @@ class Model_user extends CI_Model
         $this->db->query($request);
     }
 
-    public function get_ListePropositionPerso($idproprioorigine){
+    public function get_liste_mes_propositions($idproprioorigine){
         $tab = array();
         $request = "SELECT * from echange where idproprioorigine = %d";
         $request = sprintf($request,$this->db->escape($idproprioorigine));
@@ -40,7 +33,7 @@ class Model_user extends CI_Model
     return $tab;
     }
 
-    public function get_ListePropositionAutres($idproprionouveau){
+    public function get_liste_propositions_autres($idproprionouveau){
         $tab = array();
         $request = "SELECT * from echange where idproprionouveau = %d";
         $request = sprintf($request,$this->db->escape($idproprionouveau));
@@ -58,6 +51,15 @@ class Model_user extends CI_Model
         $query = $this->db->query($request);
         $row = $query->row();
     return $row->nom;
+    }
+
+    public function get_IdProprietaireObjById($idobjet) {
+        $tab = array();
+        $request = "SELECT * from objet where idobjet = %d";
+        $request = sprintf($request,$this->db->escape($idobjet));
+        $query = $this->db->query($request);
+        $row = $query->row();
+    return $row->idproprietaire;
     }
 
     public function get_UtilisateurById($id) {
@@ -144,6 +146,16 @@ class Model_user extends CI_Model
         }
     return $tab;
     }
+
+    public function proposer_echange($idobjetorigine, $idobjetcible, $idproprioorigine, $idproprionouveau){
+        $request = "INSERT INTO echange VALUES (NULL, %d, %d, %d, %d, NOW() ,'attente')";
+        $idobjetorigine = $this->db->escape($idobjetorigine);
+        $idproprioorigine = $this->db->escape($idproprioorigine);
+        $idobjetcible = $this->db->escape($idobjetcible);
+        $idproprionouveau = $this->db->escape($idproprionouveau);
+        $request = sprintf($request, $idobjetorigine, $idobjetcible, $idproprioorigine, $idproprionouveau );
+        $this->db->query($request);
+    }    
 
 
 
