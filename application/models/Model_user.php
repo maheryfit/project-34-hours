@@ -24,7 +24,7 @@ class Model_user extends CI_Model
 
     public function get_liste_mes_propositions($idproprioorigine){
         $tab = array();
-        $request = "SELECT * from echange where idproprioorigine = %d";
+        $request = "SELECT * from echange where idproprioorigine = %s";
         $request = sprintf($request,$this->db->escape($idproprioorigine));
         $query = $this->db->query($request);
         foreach ($query->result_array() as $row) {
@@ -35,7 +35,7 @@ class Model_user extends CI_Model
 
     public function get_liste_propositions_autres($idproprionouveau){
         $tab = array();
-        $request = "SELECT * from echange where idproprionouveau = %d";
+        $request = "SELECT * from echange where idproprionouveau = %s";
         $request = sprintf($request,$this->db->escape($idproprionouveau));
         $query = $this->db->query($request);
         foreach ($query->result_array() as $row) {
@@ -46,7 +46,7 @@ class Model_user extends CI_Model
 
     public function get_NomObjById($idobjet) {
         $tab = array();
-        $request = "SELECT * from objet where idobjet = %d";
+        $request = "SELECT * from objet where idobjet = %s";
         $request = sprintf($request,$this->db->escape($idobjet));
         $query = $this->db->query($request);
         $row = $query->row();
@@ -55,7 +55,7 @@ class Model_user extends CI_Model
 
     public function get_IdProprietaireObjById($idobjet) {
         $tab = array();
-        $request = "SELECT * from objet where idobjet = %d";
+        $request = "SELECT * from objet where idobjet = %s";
         $request = sprintf($request,$this->db->escape($idobjet));
         $query = $this->db->query($request);
         $row = $query->row();
@@ -63,7 +63,7 @@ class Model_user extends CI_Model
     }
 
     public function get_UtilisateurById($id) {
-        $request = "SELECT * from utilisateur where idutilisateur = %d";
+        $request = "SELECT * from utilisateur where idutilisateur = %s";
         $request = sprintf($request,$this->db->escape($id));
         $query = $this->db->query($request);
         $row = $query->row();
@@ -97,7 +97,7 @@ class Model_user extends CI_Model
 
     public function getlistemesobjet($idProprietaire){
         $tab = array();
-        $request = "SELECT * from v_objet_categorie where idproprietaire = %d";
+        $request = "SELECT * from v_objet_categorie where idproprietaire = %s";
         $request = sprintf($request,$this->db->escape($idProprietaire));
         $query = $this->db->query($request);
         foreach ($query->result_array() as $row) {
@@ -108,7 +108,7 @@ class Model_user extends CI_Model
 
     public function getobjetbyid($idobjet){
         $tab = array();
-        $request = "SELECT * from objet where idobjet = %d";
+        $request = "SELECT * from objet where idobjet = %s";
         $request = sprintf($request, $this->db->escape($idobjet) );
         $query = $this->db->query($request);
         foreach ($query->result_array() as $row) {
@@ -122,7 +122,7 @@ class Model_user extends CI_Model
             echo "prix invalid";
         }
         else {
-            $request = "UPDATE objet set titre = %s, description = %s, prix = %d where idobjet = %d";
+            $request = "UPDATE objet set titre = %s, description = %s, prix = %s where idobjet = %s";
             $titre = $this->db->escape($titre);
             $description = $this->db->escape($description);
             $prix = $this->db->escape($prix);
@@ -134,20 +134,20 @@ class Model_user extends CI_Model
     }
 
     public function suppresionImageObjet($idobjet){
-        $request = "DELETE FROM imageobjet VALUES where idobjet = %d";
+        $request = "DELETE FROM imageobjet VALUES where idobjet = %s";
         $request = sprintf($request, $this->db->escape($idobjet) );
         $this->db->query($request);
     }
 
     public function ajouterImageObjet($idobjet,$urlimage){
-        $request = "INSERT INTO imageobjet values( NULL, %d, %s)";
+        $request = "INSERT INTO imageobjet values( NULL, %s, %s)";
         $request = sprintf($request, $this->db->escape($idobjet), $this->db->escape($urlimage) );
         $this->db->query($request);
     }
 
     public function get_liste_objet_autres($idProprietaire) {
         $tab = array();
-        $request = "SELECT * from v_objet_categorie where idproprietaire != %d";
+        $request = "SELECT * from v_objet_categorie where idproprietaire != %s";
         $request = sprintf($request,$this->db->escape($idProprietaire));
         $query = $this->db->query($request);
         foreach ($query->result_array() as $row) {
@@ -157,7 +157,7 @@ class Model_user extends CI_Model
     }
 
     public function proposer_echange($idobjetorigine, $idobjetcible, $idproprioorigine, $idproprionouveau){
-        $request = "INSERT INTO echange VALUES (NULL, %d, %d, %d, %d, NOW() ,'attente')";
+        $request = "INSERT INTO echange VALUES (NULL, %s, %s, %s, %s, NOW() ,'attente')";
         $idobjetorigine = $this->db->escape($idobjetorigine);
         $idproprioorigine = $this->db->escape($idproprioorigine);
         $idobjetcible = $this->db->escape($idobjetcible);
@@ -167,19 +167,19 @@ class Model_user extends CI_Model
     }  
 
     public function accepter_proposition($idechange){
-        $request = "UPDATE echange set etat = 'confirme' where idechange = %d";
+        $request = "UPDATE echange set etat = 'confirme' where idechange = %s";
         $request = sprintf($request, $this->db->escape($idechange) );
         $this->db->query($request);
     }
 
     public function refuser_proposition($idechange){
-        $request = "UPDATE echange set etat = 'refus' where idechange = %d";
+        $request = "UPDATE echange set etat = 'refus' where idechange = %s";
         $request = sprintf($request, $this->db->escape($idechange) );
         $this->db->query($request);
     }
 
     public function annuler_proposition($idechange){
-        $request = "UPDATE echange set etat = 'annule' where idechange = %d";
+        $request = "UPDATE echange set etat = 'annule' where idechange = %s";
         $request = sprintf($request, $this->db->escape($idechange) );
         $this->db->query($request);
     }
@@ -196,7 +196,7 @@ class Model_user extends CI_Model
 
     public function rechercheObjet($motcle, $idcategorie) {
         $tab = array();
-        $request = "SELECT * from objet  where nom like %s and idcategorie = %d";
+        $request = "SELECT * from objet  where nom like %s and idcategorie = %s";
         if($idcategorie == 0) {
             $request = "SELECT * from objet  where nom like %s";
             $request = sprintf($request, $this->db->escape($motcle));
@@ -213,7 +213,7 @@ class Model_user extends CI_Model
 
     public function get_histroriqueObjet($idobjet) {
         $tab = array();
-        $request = "SELECT * from echange where ( idobjetorigine = %d or idobjetcible = %d ) and etat = 'confirme'";
+        $request = "SELECT * from echange where ( idobjetorigine = %s or idobjetcible = %s ) and etat = 'confirme'";
         $request = sprintf($request, $this->db->escape($idobjet), $this->db->escape($idobjet));
         $query = $this->db->query($request);
         foreach ($query->result_array() as $row) {
@@ -224,7 +224,7 @@ class Model_user extends CI_Model
 
     public function countEchange ($mois, $anne) {
         $val = 0;
-        $request = "SELECT count(*) AS isa FROM echange WHERE MONTH(dateechange) = %d and YEAR(dateechange) = %d";
+        $request = "SELECT count(*) AS isa FROM echange WHERE MONTH(dateechange) = %s and YEAR(dateechange) = %s";
         $request = sprintf($request, $this->db->escape($mois) , $this->db->escape($anne));
         $query = $this->db->query($request);
         $row = $query->row();
@@ -255,7 +255,7 @@ class Model_user extends CI_Model
 
     public function countInsrcription($mois, $anne) {
         $val = 0;
-        $request = "SELECT count(*) AS isa FROM utilisateur WHERE MONTH(dateechange) = %d and YEAR(dateinscription) = %d";
+        $request = "SELECT count(*) AS isa FROM utilisateur WHERE MONTH(dateechange) = %s and YEAR(dateinscription) = %s";
         $request = sprintf($request, $this->db->escape($mois) , $this->db->escape($anne));
         $query = $this->db->query($request);
         $row = $query->row();
