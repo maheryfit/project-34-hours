@@ -10,6 +10,8 @@ Interface admin : Update sy delete categorie mbola eritreretina sy atao am faran
 		. Model_user.php :
 			Fonctions :
 			. verifierlogin(...,...)
+			. getlistepropositionperso(...)
+			. getlistepropositionautres(...)
 			. inscription(...,...,...) 
 				* raha depuis interface client dia isadmin = 0
 				* raha depuis interface admin dia isadmin = 1
@@ -18,9 +20,10 @@ Interface admin : Update sy delete categorie mbola eritreretina sy atao am faran
 			. getlistemesobjet(...)
 			. getobjetbyid(...)
 			. modifierobjetsimple(..., ..., ...)
-			. suppresionimageobjet()
-			. ajoutimageobjet()
+			. suppresionimageobjet() (mety hoe suppression na ajout)
+			. ajoutimageobjet() (mety hoe suppression na ajout)
 			. get_liste_objet_autres()
+			. ciblage_objet_a_echanger()
 			. proposer_echange(..., ...)
 			. getliste_mes_propositions()
 			. getliste_propositions_autres()
@@ -35,14 +38,12 @@ Interface admin : Update sy delete categorie mbola eritreretina sy atao am faran
 			. vers_inscription_client()
 			. traitement_inscription_client()
 			. traitement_connexion_client()
-			. traitement_connexion_admin()
 			. vers_gestion_categorie()
 			. traitement_insertion_categorie()
 			. vers_liste_mes_objet(...)
 			. vers_fiche_unique_objet()
 			. traitement_suppressionimage()
 			. traitement_ajoutimage()
-			. traitement_modification_objet()
 			. vers_liste_objet_autres()
 			. vers_proposition_echange()
 			. traitement_proposition_echange()
@@ -55,3 +56,16 @@ Interface admin : Update sy delete categorie mbola eritreretina sy atao am faran
 	- Creation pages (voir pencil)
 
 - Creation to do list Excel (Mahery) 
+
+
+- partie 2
+	. modele
+	 	. rechercheObjet
+		. get_histroriqueObjet
+		. getEchangeBetween(anne , moisdebut, moisfin)
+		. getInscriptionBetween(...)
+	. controlleur
+		. vers_recherche()
+		. vers_proposition_echange()
+		. vers_stat_nbutilisateur()
+		. vers_stat_nbEchange()
