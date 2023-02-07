@@ -97,7 +97,7 @@ class Model_user extends CI_Model
 
     public function getlistemesobjet($idProprietaire){
         $tab = array();
-        $request = "SELECT * from v_categorie_objet where idproprietaire = %d";
+        $request = "SELECT * from v_objet_categorie where idproprietaire = %d";
         $request = sprintf($request,$this->db->escape($idProprietaire));
         $query = $this->db->query($request);
         foreach ($query->result_array() as $row) {

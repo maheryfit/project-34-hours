@@ -100,4 +100,5 @@ insert into echange (idobjetorigine, idobjetcible, idproprioorigine, idpropriono
 
 create or replace view v_objet_categorie as select * from objet natural join categorie;
 
+create or replace view v_objet_image_objet as select * from objet natural join imageobjet;
 --test
