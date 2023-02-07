@@ -174,6 +174,14 @@ class Model_user extends CI_Model
     return $row;
     }
 
+    public function get_idProprietaireByidObjet($idobjet) {
+        $request = "SELECT * from objet where idobjet = %s";
+        $request = sprintf($request, $this->db->escape($idobjet));
+        $query = $this->db->query($request);
+        $row = $query->row();
+    return $row->idproprietaire;
+    }
+
     public function accepter_proposition($idechange){
         $request = "UPDATE echange set etat = 'confirme' where idechange = %s";
         $request = sprintf($request, $this->db->escape($idechange) );
