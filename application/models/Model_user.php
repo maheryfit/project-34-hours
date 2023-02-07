@@ -5,15 +5,15 @@ class Model_user extends CI_Model
 {
     
     public function verify_Login($nom,$mail,$mdp) {
-        $tab = array();
+        $val = 'not_found';
         $request = "SELECT * from utilisateur where (nom = '%s' or mail = '%s') and motdepasse = '%s'";
         $request = sprintf($request,$this->db->escape($nom), $this->db->escape($mail), $this->db->escape($mdp));
         $query = $this->db->query($request);
         $row = $query->row();
         if(isset($row)) {
-            return true;
+            $val = $row->idutilisateur;
         }
-    return false;
+    return $val;
     }
 
     public function inscription($nom, $mail, $mdp) {
