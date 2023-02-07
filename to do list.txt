@@ -1,0 +1,57 @@
+NB : 
+Interface admin : Update sy delete categorie mbola eritreretina sy atao am farany
+
+- Base (Ced):
+	- Creation tables
+	- Donnees de test
+
+- Metier :
+	- Modeles :
+		. Model_user.php :
+			Fonctions :
+			. verifierlogin(...,...)
+			. inscription(...,...,...) 
+				* raha depuis interface client dia isadmin = 0
+				* raha depuis interface admin dia isadmin = 1
+			. getlistcategories()
+			. insertioncategorie()
+			. getlistemesobjet(...)
+			. getobjetbyid(...)
+			. modifierobjetsimple(..., ..., ...)
+			. suppresionimageobjet()
+			. ajoutimageobjet()
+			. get_liste_objet_autres()
+			. proposer_echange(..., ...)
+			. getliste_mes_propositions()
+			. getliste_propositions_autres()
+			. annuler_proposition()
+			. accepter_proposition()
+			. refuser_proposition()
+	- Controlleur:
+		. Controlleur_user.php :
+			Fonctions :
+			. vers_login_admin()
+			. vers_login_client()
+			. vers_inscription_client()
+			. traitement_inscription_client()
+			. traitement_connexion_client()
+			. traitement_connexion_admin()
+			. vers_gestion_categorie()
+			. traitement_insertion_categorie()
+			. vers_liste_mes_objet(...)
+			. vers_fiche_unique_objet()
+			. traitement_suppressionimage()
+			. traitement_ajoutimage()
+			. traitement_modification_objet()
+			. vers_liste_objet_autres()
+			. vers_proposition_echange()
+			. traitement_proposition_echange()
+			. vers_gestion_echange()
+			. traitement_annulation_proposition()
+			. traitement_acceptation_proposition()
+			. traitement_refus_proposition()
+
+- Vue (Mahery) : 
+	- Creation pages (voir pencil)
+
+- Creation to do list Excel (Mahery) 
