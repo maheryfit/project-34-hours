@@ -31,7 +31,7 @@ class Model_user extends CI_Model
 
     public function get_ListePropositionPerso($idproprioorigine){
         $tab = array();
-        $request = "SELECT * from echange where idproprioorigine = '%s'";
+        $request = "SELECT * from echange where idproprioorigine = %d";
         $request = sprintf($request,$this->db->escape($idproprioorigine));
         $query = $this->db->query($request);
         foreach ($query->result_array() as $row) {
@@ -42,7 +42,7 @@ class Model_user extends CI_Model
 
     public function get_ListePropositionAutres($idproprionouveau){
         $tab = array();
-        $request = "SELECT * from echange where idproprionouveau = '%s'";
+        $request = "SELECT * from echange where idproprionouveau = %d";
         $request = sprintf($request,$this->db->escape($idproprionouveau));
         $query = $this->db->query($request);
         foreach ($query->result_array() as $row) {
@@ -53,7 +53,7 @@ class Model_user extends CI_Model
 
     public function get_NomObjById($idobjet) {
         $tab = array();
-        $request = "SELECT * from objet where idobjet = '%s'";
+        $request = "SELECT * from objet where idobjet = %d";
         $request = sprintf($request,$this->db->escape($idobjet));
         $query = $this->db->query($request);
         $row = $query->row();
@@ -61,7 +61,7 @@ class Model_user extends CI_Model
     }
 
     public function get_UtilisateurById($id) {
-        $request = "SELECT * from utilisateur where idutilisateur = '%s'";
+        $request = "SELECT * from utilisateur where idutilisateur = %d";
         $request = sprintf($request,$this->db->escape($id));
         $query = $this->db->query($request);
         $row = $query->row();
@@ -70,7 +70,7 @@ class Model_user extends CI_Model
 
     public function get_listCategories() {
         $tab = array();
-        $request = "SELECT * from catecorie";
+        $request = "SELECT * from categorie";
         $query = $this->db->query($request);
         foreach ($query->result_array() as $row) {
             array_push($tab, $row);
@@ -84,7 +84,28 @@ class Model_user extends CI_Model
         $this->db->query($request);
     }
 
-    
+    public function getlistemesobjet($idProprietaire){
+        $tab = array();
+        $request = "SELECT * from v_categorie_objet where idproprietaire = %d";
+        $request = sprintf($request,$this->db->escape($idProprietaire));
+        $query = $this->db->query($request);
+        foreach ($query->result_array() as $row) {
+            array_push($tab, $row);
+        }
+    return $tab;
+    }
+
+    public function getobjetbyid($idobjet){
+        $tab = array();
+        $request = "SELECT * from objet where idobjet = %d";
+        $query = $this->db->query($request);
+        foreach ($query->result_array() as $row) {
+            array_push($tab, $row);
+        }
+    return $tab;
+    }
+
+
 
 
 
