@@ -58,7 +58,7 @@ class Controlleur_user extends CI_Controller {
 
 		$nom = $this->input->post('nom');
 		$mail = $this->input->post('mail');
-		$mdp = $this->input->post('mdp');
+		$mdp = $this->input->post('pswd');
 
 		if (($nom != null) && ($mail != null) && ($mdp != null))
 		{
@@ -87,20 +87,19 @@ class Controlleur_user extends CI_Controller {
 		$this->load->model('model_user');
 
 		$nom = $this->input->post('nom');
-		$mail = $this->input->post('mail');
-		$mdp = $this->input->post('mdp');
+		$mdp = $this->input->post('pswd');
 
 
-		if (($nom != null) && ($mail != null) && ($mdp != null))
+		if (($nom != null) && ($mdp != null))
 		{
-			if(($this->model_user->verify_Login($nom, $mail, $mdp))!='not found')
+			if(($this->model_user->verify_Login($nom, $mdp))!='not found')
 			{   
-                $this->session->set_userdata('idutilisateur', ''.$this->model_user->verify_Login($nom, $mail, $mdp));
+                $this->session->set_userdata('idutilisateur', ''.$this->model_user->verify_Login($nom, $mdp));
                 $dataliste['listeobjets'] = $this->model_user->getlistemesobjet();
                 $dataliste['title'] = "Liste des objets du client";
-                $dataliste['pages'] = "form-template";
+                $dataliste['pages'] = "accueil-client";
 
-		        $this->load->view('sign-in-client');
+		        $this->load->view('form-template', $dataliste);
 			}
 			else
 			{
@@ -113,15 +112,39 @@ class Controlleur_user extends CI_Controller {
 		}
 			
 	}
-    
-    public function versajout()
-    {
-        $this->load->model('utilisateurs_model', 'user_model');
-        $dataliste['data'] = $this->user_model->getlistecategorie();
-        $dataliste['databenef'] = $this->user_model->getlistebeneficiaire();
 
-		$this->load->view('ajoutdepense', $dataliste);
-    }
+    public function traitementloginadmin()
+	{	
+		$this->load->model('model_user');
+
+		$nom = $this->input->post('nom');
+		$mdp = $this->input->post('pswd');
+
+
+		if (($nom != null) && ($mdp != null))
+		{
+			if(($this->model_user->verify_Login($nom, $mdp))!='not found')
+			{   
+                $this->session->set_userdata('idutilisateur', ''.$this->model_user->verify_Login($nom, $mdp));
+                $dataliste['listeobjets'] = $this->model_user->getlistemesobjet();
+                $dataliste['title'] = "Liste des objets du client";
+                $dataliste['pages'] = "accueil-admin";
+
+		        $this->load->view('form-template');
+			}
+			else
+			{
+				echo "Erreur";
+			}
+		}
+		elseif ((!isset($nom))||(!isset($mdp))) 
+		{
+			echo "Misy valeur null";
+		}
+			
+	}
+    
+
 
 	
 

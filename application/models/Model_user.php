@@ -4,10 +4,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Model_user extends CI_Model
 {
     
-    public function verify_Login($nom,$mail,$mdp) {
+    public function verify_Login($nom, $mdp) {
         $val = 'not_found';
-        $request = "SELECT * from utilisateur where (nom = '%s' or mail = '%s') and motdepasse = (select sha1('%s'))";
-        $request = sprintf($request,$this->db->escape($nom), $this->db->escape($mail), $this->db->escape($mdp));
+        $request = "SELECT * from utilisateur where (nom = %s or mail = %s) and motdepasse = (select sha1(%s))";
+        $request = sprintf($request,$this->db->escape($nom), $this->db->escape($nom), $this->db->escape($mdp));
         $query = $this->db->query($request);
         $row = $query->row();
         if(isset($row)) {
@@ -17,7 +17,7 @@ class Model_user extends CI_Model
     }
 
     public function inscription($nom, $mail, $mdp) {
-        $request = "INSERT INTO utilisateur VALUES (NULL,'%s','%s','%s',0)";
+        $request = "INSERT INTO utilisateur VALUES (NULL, %s, %s, %s, 0)";
         $request = sprintf($request, $this->db->escape($nom), $this->db->escape($mail), $this->db->escape($mdp));
         $this->db->query($request);
     }
@@ -81,7 +81,7 @@ class Model_user extends CI_Model
     }
 
     public function insertionCategorie($categorie){
-        $request = "INSERT INTO categorie VALUES (NULL,'%s')";
+        $request = "INSERT INTO categorie VALUES (NULL, %s)";
         $request = sprintf($request, $this->db->escape($categorie));
         $this->db->query($request);
     }
@@ -113,7 +113,7 @@ class Model_user extends CI_Model
             echo "prix invalid";
         }
         else {
-            $request = "UPDATE objet set titre = '%s', description = '%s', prix = %d where idobjet = %d";
+            $request = "UPDATE objet set titre = %s, description = %s, prix = %d where idobjet = %d";
             $titre = $this->db->escape($titre);
             $description = $this->db->escape($description);
             $prix = $this->db->escape($prix);
@@ -131,7 +131,7 @@ class Model_user extends CI_Model
     }
 
     public function ajouterImageObjet($idobjet,$urlimage){
-        $request = "INSERT INTO imageobjet values( NULL, %d, '%s')";
+        $request = "INSERT INTO imageobjet values( NULL, %d, %s)";
         $request = sprintf($request, $this->db->escape($idobjet), $this->db->escape($urlimage) );
         $this->db->query($request);
     }
