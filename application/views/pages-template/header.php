@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="<?php echo site_url('assets/css/font.css'); ?> ">
     <link rel="stylesheet" href="<?php echo site_url('assets/css/color.css'); ?> ">
     <link rel="stylesheet" href="<?php echo site_url('assets/css/page.css'); ?> ">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.css">
 </head>
 <body>
     <nav class="navbar navbar-light navbar-expand-md py-3">

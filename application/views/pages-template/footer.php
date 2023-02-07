@@ -24,6 +24,8 @@
             </div>
         </footer>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+    <script src="<?php echo site_url('assets/js/Lightbox-Gallery.js'); ?>"></script>
     <script src="<?php echo site_url('assets/bootstrap/js/bootstrap.min.js'); ?>"></script>
 </body>
 </html>
