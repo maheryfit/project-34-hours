@@ -1,0 +1,14 @@
+
+Hope you enjoy your new logo, here are the people that
+made your beautiful logo happen :)
+font name: Questa_Sans_Regular
+font link: https://www.fontspring.com/fonts/the-questa-project/questa-sans/questa-sans-regular
+font author: The Questa Project
+font author site: http://thequestaproject.com/
+Slogan Font: LindenHill-webfont.ttf
+
+icon designer: Turkkub
+icon designer link: /Turkkub
+        
+{"bg":"#DB3860","icon":"#1B3A55","font":"#ffffff","slogan":"#ffffff"}
+      
