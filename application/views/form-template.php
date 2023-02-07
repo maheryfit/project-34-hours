@@ -1,5 +1,5 @@
 <?php
-    $this->view->load("form-template/header");
-    $this->view->load("body/$pages");
-    $this->view->load("form-template/footer");
+    $this->load->view("form-template/header");
+    $this->load->view("body/$pages");
+    $this->load->view("form-template/footer");
 ?>

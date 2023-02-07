@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Takalo</title>
-    <link rel="shortcut icon" href="assets/Takalo-logo/vector/default.svg" type="image/x-icon">
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/font.css">
-    <link rel="stylesheet" href="assets/css/color.css">
-    <link rel="stylesheet" href="assets/css/form.css">
+    <link rel="shortcut icon" href="<?php echo site_url('assets/Takalo-logo/vector/default.svg'); ?>" type="image/x-icon">
+    <link rel="stylesheet" href="<?php echo site_url('assets/bootstrap/css/bootstrap.min.css'); ?>">
+    <link rel="stylesheet" href="<?php echo site_url('assets/css/font.css'); ?> ">
+    <link rel="stylesheet" href="<?php echo site_url('assets/css/color.css'); ?> ">
+    <link rel="stylesheet" href="<?php echo site_url('assets/css/form.css'); ?> ">
 </head>
 <body>
     <section class="position-relative py-4 py-xl-5">
@@ -23,7 +23,7 @@
                 <div class="col-md-12 col-xl-6">
                     <div class="card mb-5 flex-row">
                         <div>
-                            <img src="assets/Takalo-logo/default.png" width="95%" alt="Picture not found">
+                            <img src="<?php echo site_url('assets/Takalo-logo/default.png'); ?>" width="95%" alt="Picture not found">
                         </div>
                         <div style="min-width: 18rem;" class="card-body d-flex flex-column align-items-center">
                             <div class="bs-icon-xl bs-icon-sm bs-icon-circle bs-icon-primary bs-icon my-4">
