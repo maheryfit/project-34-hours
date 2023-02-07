@@ -8,14 +8,15 @@ create table IF NOT EXISTS utilisateur
 	mail varchar(80) NOT NULL,
 	motdepasse varchar(80) NOT NULL,
 	isadmin int, -- 0 : non, 1 : oui
+    dateinscription date,
 	PRIMARY KEY (idutilisateur)
 ) ENGINE=InnoDB DEFAULT CHARSET="utf8";
 
-insert into utilisateur (nom, mail, motdepasse, isadmin) values ('boss', 'boss@gmail.com', (select sha1('boss123')), 1);
-insert into utilisateur (nom, mail, motdepasse, isadmin) values ('jean', 'jean@gmail.com', (select sha1('jean123')), 0);
-insert into utilisateur (nom, mail, motdepasse, isadmin) values ('jacques', 'jacques@gmail.com', (select sha1('jacques123')), 0);
-insert into utilisateur (nom, mail, motdepasse, isadmin) values ('jeanne', 'jeanne@gmail.com', (select sha1('jeanne123')), 0);
-insert into utilisateur (nom, mail, motdepasse, isadmin) values ('soa', 'soa@gmail.com', (select sha1('soa123')), 0);
+insert into utilisateur (nom, mail, motdepasse, isadmin, dateinscription) values ('boss', 'boss@gmail.com', (select sha1('boss123')), 1, now());
+insert into utilisateur (nom, mail, motdepasse, isadmin, dateinscription) values ('jean', 'jean@gmail.com', (select sha1('jean123')), 0, now());
+insert into utilisateur (nom, mail, motdepasse, isadmin, dateinscription) values ('jacques', 'jacques@gmail.com', (select sha1('jacques123')), 0, now());
+insert into utilisateur (nom, mail, motdepasse, isadmin, dateinscription) values ('jeanne', 'jeanne@gmail.com', (select sha1('jeanne123')), 0, now());
+insert into utilisateur (nom, mail, motdepasse, isadmin, dateinscription) values ('soa', 'soa@gmail.com', (select sha1('soa123')), 0, now());
 
 create table IF NOT EXISTS categorie
 (
