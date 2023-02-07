@@ -97,7 +97,7 @@ class Model_user extends CI_Model
 
     public function getlistemesobjet($idProprietaire){
         $tab = array();
-        $request = "SELECT * from v_objet_image_objet where idproprietaire = %s";
+        $request = "SELECT * from  v_objet_image_categorie where idproprietaire = %s";
         $request = sprintf($request,$this->db->escape($idProprietaire));
         $query = $this->db->query($request);
         foreach ($query->result_array() as $row) {
@@ -147,7 +147,7 @@ class Model_user extends CI_Model
 
     public function get_liste_objet_autres($idProprietaire) {
         $tab = array();
-        $request = "SELECT * from v_objet_image_objet where idproprietaire != %s";
+        $request = "SELECT * from  v_objet_image_categorie where idproprietaire != %s";
         $request = sprintf($request,$this->db->escape($idProprietaire));
         $query = $this->db->query($request);
         foreach ($query->result_array() as $row) {
@@ -172,6 +172,14 @@ class Model_user extends CI_Model
         $query = $this->db->query($request);
         $row = $query->row();
     return $row;
+    }
+
+    public function get_idProprietaireByidObjet($idobjet) {
+        $request = "SELECT * from objet where idobjet = %s";
+        $request = sprintf($request, $this->db->escape($idobjet));
+        $query = $this->db->query($request);
+        $row = $query->row();
+    return $row->idproprietaire;
     }
 
     public function accepter_proposition($idechange){
@@ -210,7 +218,7 @@ class Model_user extends CI_Model
 
     public function get_objetImageById($idobjet) {
         $tab = array();
-        $request = "SELECT * from v_objet_image_objet where idobjet = %s";
+        $request = "SELECT * from  v_objet_image_categorie where idobjet = %s";
         $request = sprintf($request, $this->db->escape($idobjet));
         $query = $this->db->query($request);
         foreach ($query->result_array() as $row) {
