@@ -80,6 +80,15 @@ class Model_user extends CI_Model
     return $tab;
     }
 
+    public function getCategoriebyNom($nom)
+    {
+        $request = "SELECT * from categorie where nom = %s";
+        $request = sprintf($request,$this->db->escape($nom));
+        $query = $this->db->query($request);
+        $row = $query->row();
+        return $row;
+    }
+
     public function insertionCategorie($categorie){
         $request = "INSERT INTO categorie VALUES (NULL, %s)";
         $request = sprintf($request, $this->db->escape($categorie));

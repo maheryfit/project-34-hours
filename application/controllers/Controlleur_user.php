@@ -62,7 +62,7 @@ class Controlleur_user extends CI_Controller {
 
 		if (($nom != null) && ($mail != null) && ($mdp != null))
 		{
-			if(($this->model_user->verifierlogin($nom, $mail, $mdp))==0)
+			if(($this->model_user->inscription($nom, $mail, $mdp)))
 			{   
                 //$dataliste['listeobjets'] = $this->model_user->getlistemesobjet();
                 $datalien['title'] = "Login client";
@@ -79,7 +79,6 @@ class Controlleur_user extends CI_Controller {
 		{
 			echo "Misy valeur null";
 		}
-		
     }
 
     public function traitementloginclient()
@@ -92,7 +91,8 @@ class Controlleur_user extends CI_Controller {
 
 		if (($nom != null) && ($mdp != null))
 		{
-			if(($this->model_user->verify_Login($nom, $mdp))!='not found')
+            $listecategories = $this->model_user->get_listCategories();
+			if(sizeof($listecategories)!=0)
 			{   
                 $this->session->set_userdata('idutilisateur', ''.$this->model_user->verify_Login($nom, $mdp));
                 $dataliste['listeobjets'] = $this->model_user->getlistemesobjet();
@@ -126,8 +126,8 @@ class Controlleur_user extends CI_Controller {
 			if(($this->model_user->verify_Login($nom, $mdp))!='not found')
 			{   
                 $this->session->set_userdata('idutilisateur', ''.$this->model_user->verify_Login($nom, $mdp));
-                $dataliste['listeobjets'] = $this->model_user->getlistemesobjet();
-                $dataliste['title'] = "Liste des objets du client";
+                $dataliste['listeobjets'] = $this->model_user->get_listCategories();
+                $dataliste['title'] = "Gestion categorie";
                 $dataliste['pages'] = "accueil-admin";
 
 		        $this->load->view('form-template');
@@ -143,31 +143,25 @@ class Controlleur_user extends CI_Controller {
 		}
 			
 	}
-    
 
-
-	
-
-    public function testajoutdepense()
+    public function testajoutcategorie()
     {
-        $this->load->model('utilisateurs_model', 'user_model');
+        $this->load->model('model_user');
 
-		$daty = $this->input->get('daty');
-		$idcat = $this->input->get('type');
-        $montant = $this->input->get('montant');
-        $idbenef = $this->input->get('idbenef');
+		$nom = $this->input->post('nom');
 
-        if (($daty != null) && ($idcat != null) && ($montant != null) && ($idbenef != null))
+        if ($nom != null)
 		{
-			if(($this->user_model->getbudgetseloncategorie($idcat)) < $montant)
+            $categorieefamisy = $this->user_model->getCategoriebyNom($nom);
+			if(sizeof($categorieefamisy)==0)
 			{   
-                echo "Ajout effectué";
+                echo "Ajout categorie effectué";
                 $this->user_model->ajoutdepense($daty, $idcat, $montant, $idbenef);
 		        $this->load->view('ajoutdepense');
 			}
 			else
 			{
-				echo "Erreur, le montant est superieur au budget mensuel pour cette categorie";
+				echo "Erreur, cette categorie existe deja";
 			}
 		}
 		elseif ((!isset($daty))||(!isset($idcat))||(!isset($daty))||(!isset($idcat))) 
