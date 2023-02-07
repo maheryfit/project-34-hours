@@ -295,13 +295,11 @@ class Controlleur_user extends CI_Controller {
         $iduseractuel = $this->session->idutilisateur;
         $idobjetcible = $this->input->post('idobjetcible');
         $idobjetorigine = $this->input->post('idobjetorigine');
+        $idpropriocible = $this->model_user->get_idProprietaireByidObjet('idobjetcible');
         $dataobjet['mesobjets'] = $this->model_user->getlistemesobjets($iduseractuel);
-        $this->model_user->proposer_echange($idobjetorigine, $idobjetcible, $iduseractuel, $idobjetorigine);
+        $this->model_user->proposer_echange($idobjetorigine, $idobjetcible, $iduseractuel, $idpropriocible);
         $dataobjet['pages'] = "proposition-echange";
-
         $this->load->view('pages-template-client', $dataobjet);
-
-
     }
 
 	public function redirectindex()
