@@ -155,7 +155,29 @@ class Model_user extends CI_Model
         $idproprionouveau = $this->db->escape($idproprionouveau);
         $request = sprintf($request, $idobjetorigine, $idobjetcible, $idproprioorigine, $idproprionouveau );
         $this->db->query($request);
-    }    
+    }  
+
+    public function accepter_proposition($idechange){
+        $request = "UPDATE echange set etat = 'confirme' where idechange = %d";
+        $request = sprintf($request, $this->db->escape($idechange) );
+        $this->db->query($request);
+    }
+
+    public function refuser_proposition($idechange){
+        $request = "UPDATE echange set etat = 'refus' where idechange = %d";
+        $request = sprintf($request, $this->db->escape($idechange) );
+        $this->db->query($request);
+    }
+
+    public function annuler_proposition($idechange){
+        $request = "UPDATE echange set etat = 'annule' where idechange = %d";
+        $request = sprintf($request, $this->db->escape($idechange) );
+        $this->db->query($request);
+    }
+
+    
+    
+    
 
 
 
