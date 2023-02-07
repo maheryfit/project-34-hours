@@ -1,5 +1,5 @@
-create database web_s3_takalo;
-use web_s3_takalo;
+-- create database web_s3_takalo;
+-- use web_s3_takalo;
 
 create table IF NOT EXISTS utilisateur
 (
@@ -79,7 +79,7 @@ insert into imageobjet (idobjet, urlimage) values (9, 'assets/img/pantalon4.jpg'
 insert into imageobjet (idobjet, urlimage) values (10, 'assets/img/pantalon3.jpg');
 
 
-create table IF NOT EXISTS Echange
+create table IF NOT EXISTS echange
 (
 	idechange int NOT NULL AUTO_INCREMENT,
 	idobjetorigine int NOT NULL,
