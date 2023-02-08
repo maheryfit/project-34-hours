@@ -95,6 +95,8 @@ class Controlleur_user extends CI_Controller {
             $this->session->set_userdata('idutilisateur', ''.$this->model_user->verify_Login($nom, $mdp));
             $iduseractuel = $this->session->idutilisateur;
             $dataliste['listeobjets'] = $this->model_user->getlistemesobjet($iduseractuel);
+            $dataliste['listeobjetsimageunique'] = $this->model_user->getlistemesobjetunique($iduseractuel);
+
             $dataliste['title'] = "Liste des objets du client";
             // $dataliste['title'] = $iduseractuel;
 
@@ -191,6 +193,7 @@ class Controlleur_user extends CI_Controller {
         else
         {
             $dataliste['listeobjets'] = $this->model_user->getlistemesobjet($iduseractuel);
+            $dataliste['listeobjetsimageunique'] = $this->model_user->getlistemesobjetunique($iduseractuel);
             $dataliste['title'] = "Liste des objets du client";
             // $dataliste['title'] = $iduseractuel;
     
@@ -317,6 +320,7 @@ class Controlleur_user extends CI_Controller {
             $dataobjet['title'] = "Liste des objets des autres clients";
             // $dataliste['title'] = $iduseractuel;
             $dataobjet['objetdesautres'] = $this->model_user->get_liste_objet_autres($iduseractuel);
+            $dataobjet['objetdesautresimageunique'] = $this->model_user->get_liste_objet_autres_unique($iduseractuel);
             $dataobjet['pages'] = "liste-objet-autres";
     
             $this->load->view('pages-template-client', $dataobjet);
