@@ -115,6 +115,6 @@ create table IF NOT EXISTS echange_multiple
     idobjetcible int,
     idobjetorigine int,
     idproprietairecible int,
-    idproprietaireorigine int
+    idproprietaireorigine int,
     etat varchar(10)
 );
