@@ -1,5 +1,4 @@
--- create database web_s3_takalo;
--- use web_s3_takalo;
+use project34hours_takalo;
 
 create table IF NOT EXISTS utilisateur
 (
@@ -7,7 +6,7 @@ create table IF NOT EXISTS utilisateur
 	nom varchar(15) NOT NULL,
 	mail varchar(80) NOT NULL,
 	motdepasse varchar(80) NOT NULL,
-	isadmin int, -- 0 : non, 1 : oui
+	isadmin int,
     dateinscription date,
 	PRIMARY KEY (idutilisateur)
 ) ENGINE=InnoDB DEFAULT CHARSET="utf8";
@@ -73,7 +72,7 @@ insert into imageobjet (idobjet, urlimage) values (4, 'assets/img/figurine1.jpg'
 insert into imageobjet (idobjet, urlimage) values (5, 'assets/img/figurine2.jpg');
 insert into imageobjet (idobjet, urlimage) values (6, 'assets/img/usbhub1.jpg');
 insert into imageobjet (idobjet, urlimage) values (7, 'assets/img/dvd4.jpg');
-insert into imageobjet (idobjet, urlimage) values (8, 'assets/img/souris.jpg');
+insert into imageobjet (idobjet, urlimage) values (8, 'assets/img/souris1.jpg');
 insert into imageobjet (idobjet, urlimage) values (9, 'assets/img/pantalon1.jpg');
 insert into imageobjet (idobjet, urlimage) values (9, 'assets/img/pantalon2.jpg');
 insert into imageobjet (idobjet, urlimage) values (9, 'assets/img/pantalon4.jpg');
@@ -88,7 +87,7 @@ create table IF NOT EXISTS echange
 	idproprioorigine int NOT NULL,
 	idproprionouveau int NOT NULL,
     dateechange date,
-	etat varchar(10), -- attente, annule, confirme
+	etat varchar(10),
 	PRIMARY KEY (idechange),
 	FOREIGN KEY (idobjetorigine) references objet(idobjet),
 	FOREIGN KEY (idobjetcible) references objet(idobjet),

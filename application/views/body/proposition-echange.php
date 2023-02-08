@@ -40,7 +40,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    <?php
+                        for($i = 0; $i < sizeof($tablehistorique); $i++) {
+                            ?>
+                            <tr>
+                                <td><?= $tablehistorique[$i]['proprioorigine']; ?></td>
+                                <td><?= $tablehistorique[$i]['dateechange']; ?></td>
+
+                            </tr>
+                            <?php
+                        }
+                    ?>
                 </tbody>
             </table>
         </div>

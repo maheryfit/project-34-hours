@@ -17,7 +17,7 @@ class Model_user extends CI_Model
     }
 
     public function inscription($nom, $mail, $mdp) {
-        $request = "INSERT INTO utilisateur VALUES (NULL, %s, %s, %s, 0)";
+        $request = "INSERT INTO utilisateur VALUES (NULL, %s, %s, %s, 0, now())";
         $request = sprintf($request, $this->db->escape($nom), $this->db->escape($mail), $this->db->escape($mdp));
         $this->db->query($request);
     }
@@ -90,6 +90,7 @@ class Model_user extends CI_Model
         $tab = array();
         $request = "SELECT * from objet where idobjet = %s";
         $request = sprintf($request,$this->db->escape($idobjet));
+        //echo $request;
         $query = $this->db->query($request);
         $row = $query->row();
     return $row->idproprietaire;
@@ -245,10 +246,18 @@ class Model_user extends CI_Model
         $echange = $this->get_echangeById($idechange);
         $idobj1 = $this->db->escape( $echange->idobjetorigine );
         $idobj2 = $this->db->escape( $echange->idobjetcible );
-        $request1 = "UPDATE SET echange set etat ='annule' where (idobjetorigine = %s or idobjetcible = %s) and idechange != %s ";
-        $repuest1 = sprintf($request1, $idobj1, $idobj2, $this->db->escape($idechange));
+        $request1 = "UPDATE echange set etat ='annule' where (idobjetorigine = %s or idobjetcible = %s) and idechange != %s ";
+        $request1 = sprintf($request1, $idobj1, $idobj2, $this->db->escape($idechange));
+        //
+        $request2 = "UPDATE objet SET idproprietaire = '%s' where idobjet = %d ";
+        $request2 = sprintf($request2, $echange->idproprioorigine, $echange->idobjetcible);
+        //
+        $request3 = "UPDATE objet SET idproprietaire = '%s' where idobjet = %d ";
+        $request3 = sprintf($request3, $echange->idproprionouveau, $echange->idobjetorigine);
         $this->db->query($request);
-        $this->db->query($repuest1);
+        $this->db->query($request1);
+        $this->db->query($request2);
+        $this->db->query($request3);
     }
 
     public function refuser_proposition($idechange){
@@ -294,15 +303,18 @@ class Model_user extends CI_Model
     }
 
     public function rechercheObjet($motcle, $idcategorie) {
+        //echo ($motcle);
         $tab = array();
-        $request = "SELECT * from objet  where titre like %s and idcategorie = %s";
+        $request = "SELECT * from v_objet_image_categorie  where titre like '%".$motcle."%' and idcategorie =".$idcategorie."";
         if($idcategorie == 0) {
-            $request = "SELECT * from objet  where titre like %s";
-            $request = sprintf($request, $this->db->escape($motcle));
+            $request = "SELECT * from v_objet_image_categorie  where titre like '%".$motcle."%'";
+            //$request = sprintf($request, $motcle);
+            //echo $request; 
         }
-        else {
-            $request = sprintf($request, $this->db->escape($motcle),$this->db->escape($idcategorie));
-        }
+        // else {
+        //     $request = sprintf($request,$idcategorie);
+        // }
+        //echo $request;    
         $query = $this->db->query($request);
         foreach ($query->result_array() as $row) {
             array_push($tab, $row);

@@ -63,18 +63,14 @@ class Controlleur_user extends CI_Controller {
 
 		if (($nom != null) && ($mail != null) && ($mdp != null))
 		{
-			if(($this->model_user->inscription($nom, $mail, $mdp)))
-			{   
+			$this->model_user->inscription($nom, $mail, $mdp);
+			 
                 //$dataliste['listeobjets'] = $this->model_user->getlistemesobjet();
                 $datalien['title'] = "Login client";
                 $datalien['pages'] = "sign-in-client";
 
 		        $this->load->view('form-template', $datalien);
-			}
-			else
-			{
-				echo "Erreur";
-			}
+			
 		}
 		elseif ((!isset($nom))||(!isset($mail))||(!isset($mdp))) 
 		{
@@ -346,6 +342,7 @@ class Controlleur_user extends CI_Controller {
             $dataobjet['mesobjets'] = $this->model_user->getlistemesobjet($iduseractuel); //ho recuperena ao anaty drop down liste
             $dataobjet['mesobjetsunique'] = $this->model_user->getlistemesobjetunique($iduseractuel); //ho recuperena ao anaty drop down liste
             $dataobjet['objetcible'] = $this->model_user->getobjetimagebyidunique($idobjetcible);
+            $dataobjet['tablehistorique'] = $this->model_user->get_liste_historique_avec_nom($idobjetcible);
             $dataobjet['pages'] = "proposition-echange";
     
             $this->load->view('pages-template-client', $dataobjet);
@@ -366,11 +363,11 @@ class Controlleur_user extends CI_Controller {
         {
             $idobjetcible = $this->input->post('idobjetcible');
             $idobjetorigine = $this->input->post('idobjetorigine');
-            $idpropriocible = $this->model_user->get_idProprietaireByidObjet('idobjetcible');
-            $dataobjet['mesobjets'] = $this->model_user->getlistemesobjet($iduseractuel);
-            $this->model_user->proposer_echange($idobjetorigine, $idobjetcible, $iduseractuel, $idpropriocible[0]);
+            $idpropriocible = $this->model_user->get_IdProprietaireObjById($idobjetcible);
+            $dataobjet['listeobjetsimageunique'] = $this->model_user->getlistemesobjetunique($iduseractuel);
+            $this->model_user->proposer_echange($idobjetorigine, $idobjetcible, $iduseractuel, $idpropriocible);
             $dataobjet['title'] = "Interface proposition echange";
-            $dataobjet['pages'] = "proposition-echange";
+            $dataobjet['pages'] = "accueil-client";
             $this->load->view('pages-template-client', $dataobjet);
         }
         
@@ -505,19 +502,19 @@ class Controlleur_user extends CI_Controller {
     {
         $this->load->model('model_user');
 
-        $titrerecherche = $this->input->post('titrerecherche');
-        $categorierecherche = $this->input->post('categorierecherche');
+        $titrerecherche = $this->input->post('motcle');
+        $categorierecherche = $this->input->post('categorie');
         
-        $dataliste['objetdesautres'] = "recherche not good";
+        $dataliste['objetdesautresimageunique'] = "recherche not good";
         if (isset($titrerecherche) && isset($categorierecherche))
         {
             $this->model_user->rechercheObjet($titrerecherche, $categorierecherche);
-            $dataliste['objetdesautres'] = $this->model_user->rechercheObjet($titrerecherche, $categorierecherche);
+            $dataliste['objetdesautresimageunique'] = $this->model_user->rechercheObjet($titrerecherche, $categorierecherche);
         }
-
+        //$dataobjet['objetdesautresimageunique'] = $this->model_user->get_liste_objet_autres_unique($iduseractuel);
         $dataliste['title'] = "Liste des objets des autre clients";
         $dataliste['pages'] = "liste-objet-autres";
-        $this->load->view('pages-template-admin', $dataliste);
+        $this->load->view('pages-template-client', $dataliste);
     }
 
     public function vers_historique_echange()

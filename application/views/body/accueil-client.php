@@ -7,7 +7,7 @@
         <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
             <?php
                 $id = "";
-                foreach ($listeobjets as $listeobjet) { 
+                foreach ($listeobjetsimageunique as $listeobjet) { 
                     $id = $listeobjet['idobjet'];
                 ?>
                 <div class="col">
