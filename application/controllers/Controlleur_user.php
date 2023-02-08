@@ -22,6 +22,10 @@ class Controlleur_user extends CI_Controller {
 	function __construct(){
         parent::__construct();
         $this->load->helper('url'); 
+        if (!isset($this->session->idutilisateur))
+        {
+            redirect('/controlleur_user/index');
+        }
     }
 	
 	public function index()
@@ -405,7 +409,6 @@ class Controlleur_user extends CI_Controller {
     {
         $this->load->model('model_user');
 
-
         $dataliste['titrerecherche'] = "titre recherche not found";
         $dataliste['categorierecherche'] = "categorie recherche not found";
 
@@ -414,7 +417,7 @@ class Controlleur_user extends CI_Controller {
             $dataliste['titrerecherche'] = $this->input->post('titrerecherche');
             $dataliste['categorierecherche'] = $this->input->post('categorierecherche');
         }
-        $dataliste['donneesstat'] = $this->model_user->getEchangeBetween($annee, $moisdebut, $moisfin);
+        $dataliste['resulta'] = $this->model_user->getEchangeBetween($annee, $moisdebut, $moisfin);
         $dataliste['title'] = "Interface suivi inscription";
         $dataliste['pages'] = "suivi-inscription";
         $this->load->view('pages-template-admin', $dataliste);
