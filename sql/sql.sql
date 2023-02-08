@@ -12,8 +12,8 @@ create table IF NOT EXISTS utilisateur
 	PRIMARY KEY (idutilisateur)
 ) ENGINE=InnoDB DEFAULT CHARSET="utf8";
 
-insert into utilisateur (nom, mail, motdepasse, isadmin, dateinscription) values ('boss', 'boss@gmail.com', (select sha1('boss123')), 1, now());
-insert into utilisateur (nom, mail, motdepasse, isadmin, dateinscription) values ('jean', 'jean@gmail.com', (select sha1('jean123')), 0, now());
+insert into utilisateur (nom, mail, motdepasse, isadmin, dateinscription) values ('boss', 'boss@gmail.com', (select sha1('boss123')), 1, '2023-11-23');
+insert into utilisateur values (NULL, 'jean', 'jean@gmail.com', (select sha1('jean123')), 0, now());
 insert into utilisateur (nom, mail, motdepasse, isadmin, dateinscription) values ('jacques', 'jacques@gmail.com', (select sha1('jacques123')), 0, now());
 insert into utilisateur (nom, mail, motdepasse, isadmin, dateinscription) values ('jeanne', 'jeanne@gmail.com', (select sha1('jeanne123')), 0, now());
 insert into utilisateur (nom, mail, motdepasse, isadmin, dateinscription) values ('soa', 'soa@gmail.com', (select sha1('soa123')), 0, now());
@@ -64,17 +64,17 @@ create table IF NOT EXISTS imageobjet
     PRIMARY KEY (idimageobjet),
 	FOREIGN KEY (idobjet) references objet(idobjet)
 ) ENGINE=InnoDB DEFAULT CHARSET="utf8";
-insert into imageobjet (idobjet, urlimage) values (1, 'assets/img/dvd1.png');
+insert into imageobjet (idobjet, urlimage) values (1, 'assets/img/dvd1.jpg');
 insert into imageobjet (idobjet, urlimage) values (1, 'assets/img/dvd2.jpg');
 insert into imageobjet (idobjet, urlimage) values (2, 'assets/img/dvd3.jpg');
 insert into imageobjet (idobjet, urlimage) values (3, 'assets/img/tshirt1.jpg');
-insert into imageobjet (idobjet, urlimage) values (4, 'assets/img/figurine1.png');
+insert into imageobjet (idobjet, urlimage) values (4, 'assets/img/figurine1.jpg');
 insert into imageobjet (idobjet, urlimage) values (5, 'assets/img/figurine2.jpg');
-insert into imageobjet (idobjet, urlimage) values (6, 'assets/img/usbhub1.png');
-insert into imageobjet (idobjet, urlimage) values (7, 'assets/img/dvd3.jpg');
+insert into imageobjet (idobjet, urlimage) values (6, 'assets/img/usbhub1.jpg');
+insert into imageobjet (idobjet, urlimage) values (7, 'assets/img/dvd4.jpg');
 insert into imageobjet (idobjet, urlimage) values (8, 'assets/img/souris.jpg');
-insert into imageobjet (idobjet, urlimage) values (9, 'assets/img/pantalon1.png');
-insert into imageobjet (idobjet, urlimage) values (9, 'assets/img/pantalon2.png');
+insert into imageobjet (idobjet, urlimage) values (9, 'assets/img/pantalon1.jpg');
+insert into imageobjet (idobjet, urlimage) values (9, 'assets/img/pantalon2.jpg');
 insert into imageobjet (idobjet, urlimage) values (9, 'assets/img/pantalon4.jpg');
 insert into imageobjet (idobjet, urlimage) values (10, 'assets/img/pantalon3.jpg');
 
@@ -100,4 +100,29 @@ insert into echange (idobjetorigine, idobjetcible, idproprioorigine, idpropriono
 insert into echange (idobjetorigine, idobjetcible, idproprioorigine, idproprionouveau, dateechange, etat) values (6, 1, 3, 2, current_date(), 'attente');
 
 create or replace view v_objet_image_categorie as select * from objet natural join categorie natural join imageobjet;
---test
+
+create table IF NOT EXISTS sequence
+(
+    nom varchar(25),
+    valeur int AUTO_INCREMENT CHECK (valeur > 0),
+    PRIMARY KEY (valeur)
+);
+insert into sequence values ('seq_echange_multiple', NULL);
+insert into sequence values ('seq_echange_multiple', NULL);
+insert into sequence values ('seq_echange_multiple', NULL);
+insert into sequence values ('seq_echange_multiple', NULL);
+insert into sequence values ('seq_echange_multiple', NULL);
+insert into sequence values ('seq_autre_table', NULL);
+insert into sequence values ('seq_autre_table', NULL);
+insert into sequence values ('seq_autre_table', NULL);
+
+create table IF NOT EXISTS echange_multiple
+(
+    idechange_multiple int,
+    reference varchar(10),
+    idobjetcible int,
+    idobjetorigine int,
+    idproprietairecible int,
+    idproprietaireorigine int
+    etat varchar(10)
+);
