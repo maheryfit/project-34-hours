@@ -312,7 +312,9 @@ class Controlleur_user extends CI_Controller {
         $this->load->model('model_user');
         $iduseractuel = $this->session->idutilisateur;
         $dataliste['mespropositions'] = $this->model_user->get_liste_mes_propositions($iduseractuel);
+        $dataliste['mespropositionsavecnom'] = $this->model_user->get_liste_mes_propositions_avec_nom($iduseractuel);
         $dataliste['autrespropositions'] = $this->model_user->get_liste_propositions_autres($iduseractuel);
+        $dataliste['autrespropositionsavecnom'] = $this->model_user->get_liste_propositions_autres_avec_nom($iduseractuel);
         $dataliste['pages'] = "gestion-echange";
         $dataliste['title'] = "Interface gestion echange";
         $this->load->view('pages-template-client', $dataliste);
@@ -325,7 +327,9 @@ class Controlleur_user extends CI_Controller {
         $idechangeselectionne = $this->input->get('idechange');
         $this->model_user->annuler_proposition($idechangeselectionne);
         $dataliste['mespropositions'] = $this->model_user->get_liste_mes_propositions($iduseractuel);
+        $dataliste['mespropositionsavecnom'] = $this->model_user->get_liste_mes_propositions_avec_nom($iduseractuel);
         $dataliste['autrespropositions'] = $this->model_user->get_liste_propositions_autres($iduseractuel);
+        $dataliste['autrespropositionsavecnom'] = $this->model_user->get_liste_propositions_autres_avec_nom($iduseractuel);
         $dataliste['title'] = "Interface gestion echange";
         $dataliste['pages'] = "gestion-echange";
         $this->load->view('pages-template-client', $dataliste);
@@ -338,7 +342,9 @@ class Controlleur_user extends CI_Controller {
         $idechangeselectionne = $this->input->get('idechange');
         $this->model_user->refuser_proposition($idechangeselectionne);
         $dataliste['mespropositions'] = $this->model_user->get_liste_mes_propositions($iduseractuel);
+        $dataliste['mespropositionsavecnom'] = $this->model_user->get_liste_mes_propositions_avec_nom($iduseractuel);
         $dataliste['autrespropositions'] = $this->model_user->get_liste_propositions_autres($iduseractuel);
+        $dataliste['autrespropositionsavecnom'] = $this->model_user->get_liste_propositions_autres_avec_nom($iduseractuel);
         $dataliste['title'] = "Interface gestion echange";
         $dataliste['pages'] = "gestion-echange";
         $this->load->view('pages-template-client', $dataliste);
@@ -351,7 +357,9 @@ class Controlleur_user extends CI_Controller {
         $idechangeselectionne = $this->input->get('idechange');
         $this->model_user->accepter_proposition($idechangeselectionne);
         $dataliste['mespropositions'] = $this->model_user->get_liste_mes_propositions($iduseractuel);
+        $dataliste['mespropositionsavecnom'] = $this->model_user->get_liste_mes_propositions_avec_nom($iduseractuel);
         $dataliste['autrespropositions'] = $this->model_user->get_liste_propositions_autres($iduseractuel);
+        $dataliste['autrespropositionsavecnom'] = $this->model_user->get_liste_propositions_autres_avec_nom($iduseractuel);
         $dataliste['title'] = "Interface gestion echange";
         $dataliste['pages'] = "gestion-echange";
         $this->load->view('pages-template-client', $dataliste);
@@ -360,25 +368,14 @@ class Controlleur_user extends CI_Controller {
     public function vers_recherche()
     {
         $this->load->model('model_user');
-
-        //misy anty satria miverina eo am tenany
         $titrerecherche = $this->input->post('titrerecherche');
         $categorierecherche = $this->input->post('categorierecherche');
-
-        $dataliste['titrerecherche'] = "titre recherche not found";
-        $dataliste['categorierecherche'] = "categorie recherche not found";
-
-        if (isset($titrerecherche) && isset($categorierecherche))
-        {
-            $dataliste['titrerecherche'] = $this->input->post('titrerecherche');
-            $dataliste['categorierecherche'] = $this->input->post('categorierecherche');
-        }
-        //misy anty satria miverina eo am tenany
-
-
+        
+        $dataliste['categories'] = $this->model_user->get_listCategories();
         $dataliste['title'] = "Interface recherche objet";
-        $dataliste['pages'] = "gestion-echange";
+        $dataliste['pages'] = "recherche-objet";
         $this->load->view('pages-template-client', $dataliste);
+        
     }
 
     public function vers_stat_nb_utilisateur()
@@ -409,18 +406,23 @@ class Controlleur_user extends CI_Controller {
     {
         $this->load->model('model_user');
 
-        $dataliste['titrerecherche'] = "titre recherche not found";
-        $dataliste['categorierecherche'] = "categorie recherche not found";
-
+        $titrerecherche = "titre recherche not found";
+        $categorierecherche = "categorie recherche not found";
+        $dataliste['objetdesautres'] = "recherche not good";
         if (isset($titrerecherche) && isset($categorierecherche))
         {
-            $dataliste['titrerecherche'] = $this->input->post('titrerecherche');
-            $dataliste['categorierecherche'] = $this->input->post('categorierecherche');
+            $this->model_user->rechercheObjet($titrerecherche, $categorierecherche);
+            $dataliste['objetdesautres'] = $this->model_user->rechercheObjet($titrerecherche, $categorierecherche);
         }
-        $dataliste['resulta'] = $this->model_user->getEchangeBetween($annee, $moisdebut, $moisfin);
-        $dataliste['title'] = "Interface suivi inscription";
-        $dataliste['pages'] = "suivi-inscription";
+
+        $dataliste['title'] = "Liste des objets des autre clients";
+        $dataliste['pages'] = "liste-objet-autres";
         $this->load->view('pages-template-admin', $dataliste);
+    }
+
+    public function vers_historique_recherche()
+    {
+
     }
 
 	public function redirectindex()
