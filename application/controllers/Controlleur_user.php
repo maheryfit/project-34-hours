@@ -344,7 +344,7 @@ class Controlleur_user extends CI_Controller {
             $dataobjet['title'] = "Interface proposition echange";
             // $dataliste['title'] = $iduseractuel;
             $dataobjet['mesobjets'] = $this->model_user->getlistemesobjet($iduseractuel); //ho recuperena ao anaty drop down liste
-            $dataobjet['objetcible'] = $this->model_user->getobjetimagebyid($idobjetcible);
+            $dataobjet['objetcible'] = $this->model_user->getobjetimagebyidunique($idobjetcible);
             $dataobjet['pages'] = "proposition-echange";
     
             $this->load->view('pages-template-client', $dataobjet);
