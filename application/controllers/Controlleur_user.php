@@ -95,6 +95,7 @@ class Controlleur_user extends CI_Controller {
             $this->session->set_userdata('idutilisateur', ''.$this->model_user->verify_Login($nom, $mdp));
             $iduseractuel = $this->session->idutilisateur;
             $dataliste['listeobjets'] = $this->model_user->getlistemesobjet($iduseractuel);
+            $dataliste['']
             $dataliste['title'] = "Liste des objets du client";
             // $dataliste['title'] = $iduseractuel;
 
@@ -217,7 +218,7 @@ class Controlleur_user extends CI_Controller {
             //ty atao anaty input hidden rehefa tonga anatinle vue dia passena rehefa anao modification objet
             $dataobjet['title'] = "Modification d'un objet";
             // $dataliste['title'] = $iduseractuel;
-            $dataobjet['imagesobjet'] = $this->model_user->getobjetimage($idobjet);
+            $dataobjet['imagesobjet'] = $this->model_user->getobjetimagebyid($idobjet);
             $dataobjet['pages'] = "modification-objet";
     
             $this->load->view('pages-template-client', $dataobjet);
@@ -240,7 +241,7 @@ class Controlleur_user extends CI_Controller {
             
             $dataobjet['title'] = "Modification d'un objet";
             // $dataliste['title'] = $iduseractuel;
-            $dataobjet['imagesobjet'] = $this->model_user->getobjetimage($idobjet);
+            $dataobjet['imagesobjet'] = $this->model_user->getobjetimagebyid($idobjet);
             $this->model_user->suppression_objet_image($idobjetimage);
             $dataobjet['pages'] = "modification-objet";
 
@@ -264,7 +265,7 @@ class Controlleur_user extends CI_Controller {
             
             $dataobjet['title'] = "Modification d'un objet";
             // $dataliste['title'] = $iduseractuel;
-            $dataobjet['imagesobjet'] = $this->model_user->getobjetimage($idobjet);
+            $dataobjet['imagesobjet'] = $this->model_user->getobjetimagebyid($idobjet);
             $this->model_user->suppression_objet_image($idobjetimage);
             $dataobjet['pages'] = "modification-objet";
 
@@ -294,7 +295,7 @@ class Controlleur_user extends CI_Controller {
             //ty atao anaty input hidden rehefa tonga anatinle vue dia passena rehefa anao modification objet
             $dataobjet['title'] = "Modification d'un objet";
             // $dataliste['title'] = $iduseractuel;
-            $dataobjet['imagesobjet'] = $this->model_user->getobjetimage($idobjet);
+            $dataobjet['imagesobjet'] = $this->model_user->getobjetimagebyid($idobjet);
             $dataobjet['pages'] = "modification-objet";
     
             $this->load->view('pages-template-client', $dataobjet);

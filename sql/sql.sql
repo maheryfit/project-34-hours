@@ -103,23 +103,15 @@ create or replace view v_objet_image_categorie as select * from objet natural jo
 
 create table IF NOT EXISTS sequence
 (
-    nom varchar(25),
-    valeur int AUTO_INCREMENT CHECK (valeur > 0),
+    valeur int AUTO_INCREMENT,
     PRIMARY KEY (valeur)
 );
-insert into sequence values ('seq_echange_multiple', NULL);
-insert into sequence values ('seq_echange_multiple', NULL);
-insert into sequence values ('seq_echange_multiple', NULL);
-insert into sequence values ('seq_echange_multiple', NULL);
-insert into sequence values ('seq_echange_multiple', NULL);
-insert into sequence values ('seq_autre_table', NULL);
-insert into sequence values ('seq_autre_table', NULL);
-insert into sequence values ('seq_autre_table', NULL);
+
 
 create table IF NOT EXISTS echange_multiple
 (
     idechange_multiple int,
-    reference varchar(10),
+    reference int, --sequence
     idobjetcible int,
     idobjetorigine int,
     idproprietairecible int,
