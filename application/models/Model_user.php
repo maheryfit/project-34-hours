@@ -33,10 +33,10 @@ class Model_user extends CI_Model
     return $tab;
     }
 
-    public function get_liste_propositions_autres($idproprioorigine,$idproprionouveau){
+    public function get_liste_propositions_autres($idsession){
         $tab = array();
-        $request = "SELECT * from echange where idproprionouveau = %s and etat ='attente' and idproprioorigine = %s";
-        $request = sprintf($request,$this->db->escape($idproprionouveau), $this->db->escape($idproprioorigine));
+        $request = "SELECT * from echange where idproprionouveau = %s and etat ='attente'";
+        $request = sprintf($request,$this->db->escape($idsession));
         $query = $this->db->query($request);
         foreach ($query->result_array() as $row) {
             array_push($tab, $row);
