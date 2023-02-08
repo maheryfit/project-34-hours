@@ -95,7 +95,6 @@ class Controlleur_user extends CI_Controller {
             $this->session->set_userdata('idutilisateur', ''.$this->model_user->verify_Login($nom, $mdp));
             $iduseractuel = $this->session->idutilisateur;
             $dataliste['listeobjets'] = $this->model_user->getlistemesobjet($iduseractuel);
-            $dataliste['']
             $dataliste['title'] = "Liste des objets du client";
             // $dataliste['title'] = $iduseractuel;
 
