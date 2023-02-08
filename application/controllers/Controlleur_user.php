@@ -125,7 +125,7 @@ class Controlleur_user extends CI_Controller {
                 $dataliste['title'] = "Gestion categorie";
                 $dataliste['pages'] = "accueil-admin";
 
-		        $this->load->view('pages-template-admin');
+		        $this->load->view('pages-template-admin', $dataliste);
 			}
 			else
 			{
