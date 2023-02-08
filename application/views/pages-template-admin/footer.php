@@ -1,8 +1,9 @@
 <footer class="text-center">
             <div class="container text-muted py-4 py-lg-5">
                 <ul class="list-inline">
-                    <li class="list-inline-item me-4"><a class="link-secondary text-uppercase" href="#">Home</a></li>
-                    <li class="list-inline-item me-4"><a class="link-secondary text-uppercase" href="#">Gestion de catégories</a></li>
+                    <li class="list-inline-item me-4"><a class="link-secondary text-uppercase" href="<?= site_url("controlleur_user/vers_gestion_categorie");?>">Home</a></li>
+                    <li class="list-inline-item me-4"><a class="link-secondary text-uppercase" href="<?= site_url("controlleur_user/vers_stat_nb_echange");?>">Suivi d'echange</a></li>
+                    <li class="list-inline-item me-4"><a class="link-secondary text-uppercase" href="<?= site_url("controlleur_user/vers_stat_nb_utilisateur");?>">Suivi d'utilisateur</a></li>
                 </ul>
                 <ul class="list-inline">
                     <li class="list-inline-item me-4"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-facebook">
