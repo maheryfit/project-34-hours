@@ -22,7 +22,7 @@
                     <label class="form-label" for="choice">Choisir l'objet d'échange :</label>
                     <select name="objetorigine" class="form-select" id="choice" aria-label="Default select example">
                         <?php
-                            foreach ($mesobjets as $mesobjet) { ?>
+                            foreach ($mesobjetsunique as $mesobjet) { ?>
                                 <option value="<?=$mesobjet["idobjet"];?>"><?=$mesobjet["titre"];?></option>   
                             <?php }
                         ?>
