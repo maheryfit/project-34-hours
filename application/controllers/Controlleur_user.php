@@ -368,7 +368,7 @@ class Controlleur_user extends CI_Controller {
             $idobjetorigine = $this->input->post('idobjetorigine');
             $idpropriocible = $this->model_user->get_idProprietaireByidObjet('idobjetcible');
             $dataobjet['mesobjets'] = $this->model_user->getlistemesobjet($iduseractuel);
-            $this->model_user->proposer_echange($idobjetorigine, $idobjetcible, $iduseractuel, $idpropriocible);
+            $this->model_user->proposer_echange($idobjetorigine, $idobjetcible, $iduseractuel, $idpropriocible[0]);
             $dataobjet['title'] = "Interface proposition echange";
             $dataobjet['pages'] = "proposition-echange";
             $this->load->view('pages-template-client', $dataobjet);
@@ -522,6 +522,25 @@ class Controlleur_user extends CI_Controller {
 
     public function vers_historique_echange()
     {
+        $this->load->model('model_user');$iduseractuel = $this->session->idutilisateur;
+        if (!isset($iduseractuel)) 
+        {
+            redirect('controlleur_user/index');
+        }
+        else
+        {
+            $idobjetcible = $this->input->get('idobjetcible');
+
+            $dataobjet['title'] = "Interface proposition echange";
+            // $dataliste['title'] = $iduseractuel;
+            $dataobjet['mesobjets'] = $this->model_user->getlistemesobjet($iduseractuel); //ho recuperena ao anaty drop down liste
+            $dataobjet['mesobjetsunique'] = $this->model_user->getlistemesobjetunique($iduseractuel); //ho recuperena ao anaty drop down liste
+            $dataobjet['objetcible'] = $this->model_user->getobjetimagebyidunique($idobjetcible);
+            $dataobjet['tablehistorique'] = $this->model_user->get_historiqueObjet($idobjetcible);
+            $dataobjet['pages'] = "proposition-echange";
+    
+            $this->load->view('pages-template-client', $dataobjet);
+        }
 
     }
 
