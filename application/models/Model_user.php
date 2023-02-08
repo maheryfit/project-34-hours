@@ -33,6 +33,21 @@ class Model_user extends CI_Model
     return $tab;
     }
 
+    public function get_liste_mes_propositions_avec_nom($idproprioorigine){
+        $val = array();
+        $tab = $this->get_liste_mes_propositions($idproprioorigine);
+        for($i = 0; $i < count($tab); $i++) {
+            $val[$i]['idechange'] = $tab[$i]['idechange'];
+            $val[$i]['objetorigine'] = $this->get_NomObjById($tab[$i]['idobjetorigine']);
+            $val[$i]['objetcible'] = $this->get_NomObjById($tab[$i]['idobjetcible']);
+            $val[$i]['proprioorigine'] = $this->get_UtilisateurById($tab[$i]['idproprioorigine']);
+            $val[$i]['proprinouveau'] = $this->get_UtilisateurById($tab[$i]['idproprionouveau']);
+            $val[$i]['dateechange'] = $tab[$i]['dateechange'];
+            $val[$i]['etat'] = $tab[$i]['etat'];
+        }
+    return $val;
+    }
+
     public function get_liste_propositions_autres($idsession){
         $tab = array();
         $request = "SELECT * from echange where idproprionouveau = %s and etat ='attente'";
@@ -42,6 +57,21 @@ class Model_user extends CI_Model
             array_push($tab, $row);
         }
     return $tab;
+    }
+
+    public function get_liste_propositions_autres_avec_nom($idsession){
+        $val = array();
+        $tab = $this->get_liste_propositions_autres($idsession);
+        for($i = 0; $i < count($tab); $i++) {
+            $val[$i]['idechange'] = $tab[$i]['idechange'];
+            $val[$i]['objetorigine'] = $this->get_NomObjById($tab[$i]['idobjetorigine']);
+            $val[$i]['objetcible'] = $this->get_NomObjById($tab[$i]['idobjetcible']);
+            $val[$i]['proprioorigine'] = $this->get_UtilisateurById($tab[$i]['idproprioorigine']);
+            $val[$i]['proprinouveau'] = $this->get_UtilisateurById($tab[$i]['idproprionouveau']);
+            $val[$i]['dateechange'] = $tab[$i]['dateechange'];
+            $val[$i]['etat'] = $tab[$i]['etat'];
+        }
+    return $val;
     }
 
     public function get_NomObjById($idobjet) {
