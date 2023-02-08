@@ -298,8 +298,126 @@ class Controlleur_user extends CI_Controller {
         $idpropriocible = $this->model_user->get_idProprietaireByidObjet('idobjetcible');
         $dataobjet['mesobjets'] = $this->model_user->getlistemesobjets($iduseractuel);
         $this->model_user->proposer_echange($idobjetorigine, $idobjetcible, $iduseractuel, $idpropriocible);
+        $dataobjet['title'] = "Interface proposition echange";
         $dataobjet['pages'] = "proposition-echange";
         $this->load->view('pages-template-client', $dataobjet);
+    }
+
+    public function vers_gestion_echange()
+    {
+        $this->load->model('model_user');
+        $iduseractuel = $this->session->idutilisateur;
+        $dataliste['mespropositions'] = $this->model_user->get_liste_mes_propositions($iduseractuel);
+        $dataliste['autrespropositions'] = $this->model_user->get_liste_propositions_autres($iduseractuel);
+        $dataliste['pages'] = "gestion-echange";
+        $dataliste['title'] = "Interface gestion echange";
+        $this->load->view('pages-template-client', $dataliste);
+    }
+
+    public function annuler_proposition()
+    {
+        $this->load->model('model_user');
+        $iduseractuel = $this->session->idutilisateur;
+        $idechangeselectionne = $this->input->get('idechange');
+        $this->model_user->annuler_proposition($idechangeselectionne);
+        $dataliste['mespropositions'] = $this->model_user->get_liste_mes_propositions($iduseractuel);
+        $dataliste['autrespropositions'] = $this->model_user->get_liste_propositions_autres($iduseractuel);
+        $dataliste['title'] = "Interface gestion echange";
+        $dataliste['pages'] = "gestion-echange";
+        $this->load->view('pages-template-client', $dataliste);
+    }
+
+    public function refuser_proposition()
+    {
+        $this->load->model('model_user');
+        $iduseractuel = $this->session->idutilisateur;
+        $idechangeselectionne = $this->input->get('idechange');
+        $this->model_user->refuser_proposition($idechangeselectionne);
+        $dataliste['mespropositions'] = $this->model_user->get_liste_mes_propositions($iduseractuel);
+        $dataliste['autrespropositions'] = $this->model_user->get_liste_propositions_autres($iduseractuel);
+        $dataliste['title'] = "Interface gestion echange";
+        $dataliste['pages'] = "gestion-echange";
+        $this->load->view('pages-template-client', $dataliste);
+    }
+
+    public function accepter_proposition()
+    {
+        $this->load->model('model_user');
+        $iduseractuel = $this->session->idutilisateur;
+        $idechangeselectionne = $this->input->get('idechange');
+        $this->model_user->accepter_proposition($idechangeselectionne);
+        $dataliste['mespropositions'] = $this->model_user->get_liste_mes_propositions($iduseractuel);
+        $dataliste['autrespropositions'] = $this->model_user->get_liste_propositions_autres($iduseractuel);
+        $dataliste['title'] = "Interface gestion echange";
+        $dataliste['pages'] = "gestion-echange";
+        $this->load->view('pages-template-client', $dataliste);
+    }
+
+    public function vers_recherche()
+    {
+        $this->load->model('model_user');
+
+        //misy anty satria miverina eo am tenany
+        $titrerecherche = $this->input->post('titrerecherche');
+        $categorierecherche = $this->input->post('categorierecherche');
+
+        $dataliste['titrerecherche'] = "titre recherche not found";
+        $dataliste['categorierecherche'] = "categorie recherche not found";
+
+        if (isset($titrerecherche) && isset($categorierecherche))
+        {
+            $dataliste['titrerecherche'] = $this->input->post('titrerecherche');
+            $dataliste['categorierecherche'] = $this->input->post('categorierecherche');
+        }
+        //misy anty satria miverina eo am tenany
+
+
+        $dataliste['title'] = "Interface recherche objet";
+        $dataliste['pages'] = "gestion-echange";
+        $this->load->view('pages-template-client', $dataliste);
+    }
+
+    public function vers_stat_nb_utilisateur()
+    {
+        $this->load->model('model_user');
+        $annee = $this->input->post('annee');
+        $moisdebut = $this->input->post('moisdebut');
+        $moisfin = $this->input->post('moisfin');
+        $dataliste['donneesstat'] = $this->model_user->getInscriptionBetween($annee, $moisdebut, $moisfin);
+        $dataliste['title'] = "Interface suivi inscription";
+        $dataliste['pages'] = "suivi-inscription";
+        $this->load->view('pages-template-admin', $dataliste);
+    }
+
+    public function vers_stat_nb_echange()
+    {
+        $this->load->model('model_user');
+        $annee = $this->input->post('annee');
+        $moisdebut = $this->input->post('moisdebut');
+        $moisfin = $this->input->post('moisfin');
+        $dataliste['donneesstat'] = $this->model_user->getEchangeBetween($annee, $moisdebut, $moisfin);
+        $dataliste['title'] = "Interface suivi inscription";
+        $dataliste['pages'] = "suivi-inscription";
+        $this->load->view('pages-template-admin', $dataliste);
+    }
+
+    public function traitement_recherche()
+    {
+        $this->load->model('model_user');
+        
+
+        $dataliste['titrerecherche'] = "titre recherche not found";
+        $dataliste['categorierecherche'] = "categorie recherche not found";
+
+        if (isset($titrerecherche) && isset($categorierecherche))
+        {
+            $dataliste['titrerecherche'] = $this->input->post('titrerecherche');
+            $dataliste['categorierecherche'] = $this->input->post('categorierecherche');
+        }
+        $dataliste['donneesstat'] = $this->model_user->getEchangeBetween($annee, $moisdebut, $moisfin);
+        $dataliste['title'] = "Interface suivi inscription";
+        $dataliste['pages'] = "suivi-inscription";
+        $this->load->view('pages-template-admin', $dataliste);
     }
 
 	public function redirectindex()
