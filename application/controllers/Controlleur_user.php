@@ -523,12 +523,8 @@ class Controlleur_user extends CI_Controller {
     public function deconnexion()
     {
         $this->session>session_destroy();
-        redirect('controlleur/index');
+        redirect('controlleur_user/index');
     }
 
-	public function redirectindex()
-    {
-        redirect('/welcome/index');
-    }
 }
 ?>
