@@ -22,10 +22,12 @@
             </button>
             <div class="collapse navbar-collapse" id="navcol-3">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link text-uppercase" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link text-uppercase" href="#">Gestion de catégories</a></li>
+                    <li class="nav-item"><a class="nav-link text-uppercase" href="<?= site_url("controlleur_user/vers_gestion_categorie");?>">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-uppercase" href="<?= site_url("controlleur_user/vers_stat_nb_echange");?>">Suivi d'echange</a></li>
+                    <li class="nav-item"><a class="nav-link text-uppercase" href="<?= site_url("controlleur_user/vers_stat_nb_utilisateur");?>">Suivi d'utilisateur</a></li>
+                    <li class="nav-item"><a class="nav-link text-uppercase" href="<?= site_url("controlleur_user/vers_stat_nb_utilisateur");?>">Suivi d'utilisateur</a></li>
                 </ul>
-                <a class="btn ms-md-2" id="discard" role="button" href="#">Déconnexion</a>
+                <a class="btn ms-md-2" id="discard" role="button" href="<?= site_url("controlleur_user/deconnexion");?>">Déconnexion</a>
             </div>
         </div>
     </nav>

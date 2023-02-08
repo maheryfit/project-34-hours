@@ -1,4 +1,4 @@
-<section class="section-scroll">
+<section class="scroll-section">
     <div class="container scstyle-1 sc-overflow">
         <article>
             <div class="row">
