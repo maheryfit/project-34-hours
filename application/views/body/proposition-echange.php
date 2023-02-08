@@ -18,9 +18,9 @@
         <div class="col-6">
             <form action="<?= site_url("controlleur_user/traitement_proposition_echange");?>" class="text-center mx-auto col-6" method="post">
                 <div class="mb-4">
-                    <input type="hidden" value="<?=$objetcible->idobjet;?>;?>" name="objetcible">
+                    <input type="hidden" value="<?=$objetcible->idobjet;?>" name="idobjetcible">
                     <label class="form-label" for="choice">Choisir l'objet d'échange :</label>
-                    <select name="objetorigine" class="form-select" id="choice" aria-label="Default select example">
+                    <select name="idobjetorigine" class="form-select" id="choice" aria-label="Default select example">
                         <?php
                             foreach ($mesobjetsunique as $mesobjet) { ?>
                                 <option value="<?=$mesobjet["idobjet"];?>"><?=$mesobjet["titre"];?></option>   
@@ -30,6 +30,19 @@
                 </div>
                 <div class="mb-3"><button class="btn d-block w-100" type="submit">Appliquer</button></div>
             </form>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Date d'échange</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
