@@ -22,10 +22,7 @@ class Controlleur_user extends CI_Controller {
 	function __construct(){
         parent::__construct();
         $this->load->helper('url'); 
-        if (!isset($this->session->idutilisateur))
-        {
-            redirect('/controlleur_user/index');
-        }
+        
     }
 	
 	public function index()
@@ -187,79 +184,122 @@ class Controlleur_user extends CI_Controller {
         $this->load->model('model_user');
 
         $iduseractuel = $this->session->idutilisateur;
-
-        $dataliste['listeobjets'] = $this->model_user->getlistemesobjet($iduseractuel);
-        $dataliste['title'] = "Liste des objets du client";
-        // $dataliste['title'] = $iduseractuel;
-
-        $dataliste['pages'] = "accueil-client";
-
-        $this->load->view('pages-template-client', $dataliste);
+        if (!isset($iduseractuel)) 
+        {
+            redirect('controlleur_user/index');
+        }
+        else
+        {
+            $dataliste['listeobjets'] = $this->model_user->getlistemesobjet($iduseractuel);
+            $dataliste['title'] = "Liste des objets du client";
+            // $dataliste['title'] = $iduseractuel;
+    
+            $dataliste['pages'] = "accueil-client";
+    
+            $this->load->view('pages-template-client', $dataliste);
+        }
+        
     }
 
     public function vers_fiche_unique_objet()
     {
-        $this->load->model('model_user');
-        $idobjet = $this->input->get('idobjet');
-
-        $dataobjet['objetspecifie'] = $this->model_user->getobjetbyid($idobjet);
-        //ty atao anaty input hidden rehefa tonga anatinle vue dia passena rehefa anao modification objet
-        $dataobjet['title'] = "Modification d'un objet";
-        // $dataliste['title'] = $iduseractuel;
-        $dataobjet['imagesobjet'] = $this->model_user->getobjetimage($idobjet);
-        $dataobjet['pages'] = "modification-objet";
-
-        $this->load->view('pages-template-client', $dataobjet);
+        $iduseractuel = $this->session->idutilisateur;
+        if (!isset($iduseractuel)) 
+        {
+            redirect('controlleur_user/index');
+        }
+        else
+        {
+            $this->load->model('model_user');
+            $idobjet = $this->input->get('idobjet');
+    
+            $dataobjet['objetspecifie'] = $this->model_user->getobjetbyid($idobjet);
+            //ty atao anaty input hidden rehefa tonga anatinle vue dia passena rehefa anao modification objet
+            $dataobjet['title'] = "Modification d'un objet";
+            // $dataliste['title'] = $iduseractuel;
+            $dataobjet['imagesobjet'] = $this->model_user->getobjetimage($idobjet);
+            $dataobjet['pages'] = "modification-objet";
+    
+            $this->load->view('pages-template-client', $dataobjet);
+        }
+        
     }
 
     public function traitement_suppression_image()
     {
-        $this->load->model('model_user');
-        $idobjet = $this->input->get('idobjet');
-        $idobjetimage = $this->input->get('idobjetimage');
-        
-        $dataobjet['title'] = "Modification d'un objet";
-        // $dataliste['title'] = $iduseractuel;
-        $dataobjet['imagesobjet'] = $this->model_user->getobjetimage($idobjet);
-        $this->model_user->suppression_objet_image($idobjetimage);
-        $dataobjet['pages'] = "modification-objet";
+        $iduseractuel = $this->session->idutilisateur;
+        if (!isset($iduseractuel)) 
+        {
+            redirect('controlleur_user/index');
+        }
+        else
+        {
+            $this->load->model('model_user');
+            $idobjet = $this->input->get('idobjet');
+            $idobjetimage = $this->input->get('idobjetimage');
+            
+            $dataobjet['title'] = "Modification d'un objet";
+            // $dataliste['title'] = $iduseractuel;
+            $dataobjet['imagesobjet'] = $this->model_user->getobjetimage($idobjet);
+            $this->model_user->suppression_objet_image($idobjetimage);
+            $dataobjet['pages'] = "modification-objet";
 
-        $this->load->view('pages-template-client', $dataobjet);
+            $this->load->view('pages-template-client', $dataobjet);
+        }
+        
     }
 
     public function traitement_ajout_image()
     {
-        $this->load->model('model_user');
-        $idobjet = $this->input->get('idobjet');
-        $idobjetimage = $this->input->get('idobjetimage');
-        
-        $dataobjet['title'] = "Modification d'un objet";
-        // $dataliste['title'] = $iduseractuel;
-        $dataobjet['imagesobjet'] = $this->model_user->getobjetimage($idobjet);
-        $this->model_user->suppression_objet_image($idobjetimage);
-        $dataobjet['pages'] = "modification-objet";
+        $iduseractuel = $this->session->idutilisateur;
+        if (!isset($iduseractuel)) 
+        {
+            redirect('controlleur_user/index');
+        }
+        else
+        {
+            $this->load->model('model_user');
+            $idobjet = $this->input->get('idobjet');
+            $idobjetimage = $this->input->get('idobjetimage');
+            
+            $dataobjet['title'] = "Modification d'un objet";
+            // $dataliste['title'] = $iduseractuel;
+            $dataobjet['imagesobjet'] = $this->model_user->getobjetimage($idobjet);
+            $this->model_user->suppression_objet_image($idobjetimage);
+            $dataobjet['pages'] = "modification-objet";
 
-        $this->load->view('pages-template-client', $dataobjet);
+            $this->load->view('pages-template-client', $dataobjet);
+        }
+        
     }
 
     public function traitement_modification_objet()
     {
-        $this->load->model('model_user');
-        $idobjet = $this->input->get('idobjet');
-        $titre = $this->input->post('titre');
-        $description = $this->input->post('description');
-        $prix = $this->input->post('prix');
-
-        $this->model_user->modifierObjetSimple($idobjet, $titre, $description, $prix);
-
-        $dataobjet['objetspecifie'] = $this->model_user->getobjetbyid($idobjet);
-        //ty atao anaty input hidden rehefa tonga anatinle vue dia passena rehefa anao modification objet
-        $dataobjet['title'] = "Modification d'un objet";
-        // $dataliste['title'] = $iduseractuel;
-        $dataobjet['imagesobjet'] = $this->model_user->getobjetimage($idobjet);
-        $dataobjet['pages'] = "modification-objet";
-
-        $this->load->view('pages-template-client', $dataobjet);
+        $iduseractuel = $this->session->idutilisateur;
+        if (!isset($iduseractuel)) 
+        {
+            redirect('controlleur_user/index');
+        }
+        else
+        {
+            $this->load->model('model_user');
+            $idobjet = $this->input->get('idobjet');
+            $titre = $this->input->post('titre');
+            $description = $this->input->post('description');
+            $prix = $this->input->post('prix');
+    
+            $this->model_user->modifierObjetSimple($idobjet, $titre, $description, $prix);
+    
+            $dataobjet['objetspecifie'] = $this->model_user->getobjetbyid($idobjet);
+            //ty atao anaty input hidden rehefa tonga anatinle vue dia passena rehefa anao modification objet
+            $dataobjet['title'] = "Modification d'un objet";
+            // $dataliste['title'] = $iduseractuel;
+            $dataobjet['imagesobjet'] = $this->model_user->getobjetimage($idobjet);
+            $dataobjet['pages'] = "modification-objet";
+    
+            $this->load->view('pages-template-client', $dataobjet);
+        }
+        
     }
 
     public function vers_liste_objet_autres()
@@ -268,12 +308,20 @@ class Controlleur_user extends CI_Controller {
         
         $iduseractuel = $this->session->idutilisateur;
         
-        $dataobjet['title'] = "Liste des objets des autres clients";
-        // $dataliste['title'] = $iduseractuel;
-        $dataobjet['objetdesautres'] = $this->model_user->get_liste_objet_autres($iduseractuel);
-        $dataobjet['pages'] = "liste-objet-autres";
-
-        $this->load->view('pages-template-client', $dataobjet);
+        if (!isset($iduseractuel)) 
+        {
+            redirect('controlleur_user/index');
+        }
+        else
+        {
+            $dataobjet['title'] = "Liste des objets des autres clients";
+            // $dataliste['title'] = $iduseractuel;
+            $dataobjet['objetdesautres'] = $this->model_user->get_liste_objet_autres($iduseractuel);
+            $dataobjet['pages'] = "liste-objet-autres";
+    
+            $this->load->view('pages-template-client', $dataobjet);
+        }
+        
     }
 
     public function vers_proposition_echange()
@@ -281,15 +329,23 @@ class Controlleur_user extends CI_Controller {
         $this->load->model('model_user');
         
         $iduseractuel = $this->session->idutilisateur;
-        $idobjetcible = $this->input->get('idobjetcible');
+        if (!isset($iduseractuel)) 
+        {
+            redirect('controlleur_user/index');
+        }
+        else
+        {
+            $idobjetcible = $this->input->get('idobjetcible');
 
-        $dataobjet['title'] = "Interface proposition echange";
-        // $dataliste['title'] = $iduseractuel;
-        $dataobjet['mesobjets'] = $this->model_user->getlistemesobjet($iduseractuel); //ho recuperena ao anaty drop down liste
-        $dataobjet['objetcible'] = $this->model_user->getobjetimagebyid($idobjetcible);
-        $dataobjet['pages'] = "proposition-echange";
-
-        $this->load->view('pages-template-client', $dataobjet);
+            $dataobjet['title'] = "Interface proposition echange";
+            // $dataliste['title'] = $iduseractuel;
+            $dataobjet['mesobjets'] = $this->model_user->getlistemesobjet($iduseractuel); //ho recuperena ao anaty drop down liste
+            $dataobjet['objetcible'] = $this->model_user->getobjetimagebyid($idobjetcible);
+            $dataobjet['pages'] = "proposition-echange";
+    
+            $this->load->view('pages-template-client', $dataobjet);
+        }
+       
     }
 
     public function traitement_proposition_echange()
@@ -297,72 +353,112 @@ class Controlleur_user extends CI_Controller {
         $this->load->model('model_user');
         
         $iduseractuel = $this->session->idutilisateur;
-        $idobjetcible = $this->input->post('idobjetcible');
-        $idobjetorigine = $this->input->post('idobjetorigine');
-        $idpropriocible = $this->model_user->get_idProprietaireByidObjet('idobjetcible');
-        $dataobjet['mesobjets'] = $this->model_user->getlistemesobjets($iduseractuel);
-        $this->model_user->proposer_echange($idobjetorigine, $idobjetcible, $iduseractuel, $idpropriocible);
-        $dataobjet['title'] = "Interface proposition echange";
-        $dataobjet['pages'] = "proposition-echange";
-        $this->load->view('pages-template-client', $dataobjet);
+        if (!isset($iduseractuel)) 
+        {
+            redirect('controlleur_user/index');
+        }
+        else
+        {
+            $idobjetcible = $this->input->post('idobjetcible');
+            $idobjetorigine = $this->input->post('idobjetorigine');
+            $idpropriocible = $this->model_user->get_idProprietaireByidObjet('idobjetcible');
+            $dataobjet['mesobjets'] = $this->model_user->getlistemesobjets($iduseractuel);
+            $this->model_user->proposer_echange($idobjetorigine, $idobjetcible, $iduseractuel, $idpropriocible);
+            $dataobjet['title'] = "Interface proposition echange";
+            $dataobjet['pages'] = "proposition-echange";
+            $this->load->view('pages-template-client', $dataobjet);
+        }
+        
     }
 
     public function vers_gestion_echange()
     {
         $this->load->model('model_user');
         $iduseractuel = $this->session->idutilisateur;
-        $dataliste['mespropositions'] = $this->model_user->get_liste_mes_propositions($iduseractuel);
-        $dataliste['mespropositionsavecnom'] = $this->model_user->get_liste_mes_propositions_avec_nom($iduseractuel);
-        $dataliste['autrespropositions'] = $this->model_user->get_liste_propositions_autres($iduseractuel);
-        $dataliste['autrespropositionsavecnom'] = $this->model_user->get_liste_propositions_autres_avec_nom($iduseractuel);
-        $dataliste['pages'] = "gestion-echange";
-        $dataliste['title'] = "Interface gestion echange";
-        $this->load->view('pages-template-client', $dataliste);
+        if (!isset($iduseractuel)) 
+        {
+            redirect('controlleur_user/index');
+        }
+        else
+        {
+            $dataliste['mespropositions'] = $this->model_user->get_liste_mes_propositions($iduseractuel);
+            $dataliste['mespropositionsavecnom'] = $this->model_user->get_liste_mes_propositions_avec_nom($iduseractuel);
+            $dataliste['autrespropositions'] = $this->model_user->get_liste_propositions_autres($iduseractuel);
+            $dataliste['autrespropositionsavecnom'] = $this->model_user->get_liste_propositions_autres_avec_nom($iduseractuel);
+            $dataliste['pages'] = "gestion-echange";
+            $dataliste['title'] = "Interface gestion echange";
+            $this->load->view('pages-template-client', $dataliste);
+        }
+        
     }
 
     public function annuler_proposition()
     {
         $this->load->model('model_user');
         $iduseractuel = $this->session->idutilisateur;
-        $idechangeselectionne = $this->input->get('idechange');
-        $this->model_user->annuler_proposition($idechangeselectionne);
-        $dataliste['mespropositions'] = $this->model_user->get_liste_mes_propositions($iduseractuel);
-        $dataliste['mespropositionsavecnom'] = $this->model_user->get_liste_mes_propositions_avec_nom($iduseractuel);
-        $dataliste['autrespropositions'] = $this->model_user->get_liste_propositions_autres($iduseractuel);
-        $dataliste['autrespropositionsavecnom'] = $this->model_user->get_liste_propositions_autres_avec_nom($iduseractuel);
-        $dataliste['title'] = "Interface gestion echange";
-        $dataliste['pages'] = "gestion-echange";
-        $this->load->view('pages-template-client', $dataliste);
+        if (!isset($iduseractuel)) 
+        {
+            redirect('controlleur_user/index');
+        }
+        else
+        {
+            $idechangeselectionne = $this->input->get('idechange');
+            $this->model_user->annuler_proposition($idechangeselectionne);
+            $dataliste['mespropositions'] = $this->model_user->get_liste_mes_propositions($iduseractuel);
+            $dataliste['mespropositionsavecnom'] = $this->model_user->get_liste_mes_propositions_avec_nom($iduseractuel);
+            $dataliste['autrespropositions'] = $this->model_user->get_liste_propositions_autres($iduseractuel);
+            $dataliste['autrespropositionsavecnom'] = $this->model_user->get_liste_propositions_autres_avec_nom($iduseractuel);
+            $dataliste['title'] = "Interface gestion echange";
+            $dataliste['pages'] = "gestion-echange";
+            $this->load->view('pages-template-client', $dataliste);
+        }
+        
     }
 
     public function refuser_proposition()
     {
         $this->load->model('model_user');
         $iduseractuel = $this->session->idutilisateur;
-        $idechangeselectionne = $this->input->get('idechange');
-        $this->model_user->refuser_proposition($idechangeselectionne);
-        $dataliste['mespropositions'] = $this->model_user->get_liste_mes_propositions($iduseractuel);
-        $dataliste['mespropositionsavecnom'] = $this->model_user->get_liste_mes_propositions_avec_nom($iduseractuel);
-        $dataliste['autrespropositions'] = $this->model_user->get_liste_propositions_autres($iduseractuel);
-        $dataliste['autrespropositionsavecnom'] = $this->model_user->get_liste_propositions_autres_avec_nom($iduseractuel);
-        $dataliste['title'] = "Interface gestion echange";
-        $dataliste['pages'] = "gestion-echange";
-        $this->load->view('pages-template-client', $dataliste);
+        if (!isset($iduseractuel)) 
+        {
+            redirect('controlleur_user/index');
+        }
+        else
+        {
+            $idechangeselectionne = $this->input->get('idechange');
+            $this->model_user->refuser_proposition($idechangeselectionne);
+            $dataliste['mespropositions'] = $this->model_user->get_liste_mes_propositions($iduseractuel);
+            $dataliste['mespropositionsavecnom'] = $this->model_user->get_liste_mes_propositions_avec_nom($iduseractuel);
+            $dataliste['autrespropositions'] = $this->model_user->get_liste_propositions_autres($iduseractuel);
+            $dataliste['autrespropositionsavecnom'] = $this->model_user->get_liste_propositions_autres_avec_nom($iduseractuel);
+            $dataliste['title'] = "Interface gestion echange";
+            $dataliste['pages'] = "gestion-echange";
+            $this->load->view('pages-template-client', $dataliste);
+        }
+        
     }
 
     public function accepter_proposition()
     {
         $this->load->model('model_user');
         $iduseractuel = $this->session->idutilisateur;
-        $idechangeselectionne = $this->input->get('idechange');
-        $this->model_user->accepter_proposition($idechangeselectionne);
-        $dataliste['mespropositions'] = $this->model_user->get_liste_mes_propositions($iduseractuel);
-        $dataliste['mespropositionsavecnom'] = $this->model_user->get_liste_mes_propositions_avec_nom($iduseractuel);
-        $dataliste['autrespropositions'] = $this->model_user->get_liste_propositions_autres($iduseractuel);
-        $dataliste['autrespropositionsavecnom'] = $this->model_user->get_liste_propositions_autres_avec_nom($iduseractuel);
-        $dataliste['title'] = "Interface gestion echange";
-        $dataliste['pages'] = "gestion-echange";
-        $this->load->view('pages-template-client', $dataliste);
+        if (!isset($iduseractuel)) 
+        {
+            redirect('controlleur_user/index');
+        }
+        else
+        {
+            $idechangeselectionne = $this->input->get('idechange');
+            $this->model_user->accepter_proposition($idechangeselectionne);
+            $dataliste['mespropositions'] = $this->model_user->get_liste_mes_propositions($iduseractuel);
+            $dataliste['mespropositionsavecnom'] = $this->model_user->get_liste_mes_propositions_avec_nom($iduseractuel);
+            $dataliste['autrespropositions'] = $this->model_user->get_liste_propositions_autres($iduseractuel);
+            $dataliste['autrespropositionsavecnom'] = $this->model_user->get_liste_propositions_autres_avec_nom($iduseractuel);
+            $dataliste['title'] = "Interface gestion echange";
+            $dataliste['pages'] = "gestion-echange";
+            $this->load->view('pages-template-client', $dataliste);
+        }
+        
     }
 
     public function vers_recherche()
@@ -423,6 +519,12 @@ class Controlleur_user extends CI_Controller {
     public function vers_historique_recherche()
     {
 
+    }
+
+    public function deconnexion()
+    {
+        $this->session>session_destroy();
+        redirect('controlleur/index');
     }
 
 	public function redirectindex()
