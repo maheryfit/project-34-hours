@@ -367,7 +367,7 @@ class Controlleur_user extends CI_Controller {
             $idobjetcible = $this->input->post('idobjetcible');
             $idobjetorigine = $this->input->post('idobjetorigine');
             $idpropriocible = $this->model_user->get_idProprietaireByidObjet('idobjetcible');
-            $dataobjet['mesobjets'] = $this->model_user->getlistemesobjets($iduseractuel);
+            $dataobjet['mesobjets'] = $this->model_user->getlistemesobjet($iduseractuel);
             $this->model_user->proposer_echange($idobjetorigine, $idobjetcible, $iduseractuel, $idpropriocible);
             $dataobjet['title'] = "Interface proposition echange";
             $dataobjet['pages'] = "proposition-echange";
