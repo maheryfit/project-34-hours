@@ -40,7 +40,6 @@ a:hover {
     color: var(--white);
 }
 
-.section-scroll {
-    background-color: var(--white);
-    color: var(--secondary-color);
+.scroll-section {
+    color: var(--white);
 }
