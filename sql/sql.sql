@@ -17,6 +17,7 @@ insert into utilisateur values (NULL, 'jean', 'jean@gmail.com', (select sha1('je
 insert into utilisateur (nom, mail, motdepasse, isadmin, dateinscription) values ('jacques', 'jacques@gmail.com', (select sha1('jacques123')), 0, now());
 insert into utilisateur (nom, mail, motdepasse, isadmin, dateinscription) values ('jeanne', 'jeanne@gmail.com', (select sha1('jeanne123')), 0, now());
 insert into utilisateur (nom, mail, motdepasse, isadmin, dateinscription) values ('soa', 'soa@gmail.com', (select sha1('soa123')), 0, now());
+insert into utilisateur (nom, mail, motdepasse, isadmin, dateinscription) values ('soa1', '1soa@gmail.com', (select sha1('soa123')), 0, '2023-4-23');
 
 create table IF NOT EXISTS categorie
 (
@@ -111,10 +112,10 @@ create table IF NOT EXISTS sequence
 create table IF NOT EXISTS echange_multiple
 (
     idechange_multiple int,
-    reference int, --sequence
+    reference int, 
     idobjetcible int,
     idobjetorigine int,
     idproprietairecible int,
-    idproprietaireorigine int
+    idproprietaireorigine int,
     etat varchar(10)
 );
