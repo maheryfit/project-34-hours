@@ -66,6 +66,6 @@ Interface admin : Update sy delete categorie mbola eritreretina sy atao am faran
 		. getInscriptionBetween(...)
 	. controlleur
 		. vers_recherche()
-		. vers_proposition_echange()
+		. vers_proposition_echange() (efa misy)
 		. vers_stat_nbutilisateur()
 		. vers_stat_nbEchange()
