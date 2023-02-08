@@ -60,6 +60,8 @@ class Model_user extends CI_Model
     return $tab;
     }
 
+    
+
     public function get_liste_propositions_autres_avec_nom($idsession){
         $val = array();
         $tab = $this->get_liste_propositions_autres($idsession);
@@ -137,6 +139,17 @@ class Model_user extends CI_Model
     return $tab;
     }
 
+    public function getlistemesobjetunique($idProprietaire){
+        $tab = array();
+        $request = "SELECT * from  v_objet_image_categorie where idproprietaire = %s group by idobjet";
+        $request = sprintf($request,$this->db->escape($idProprietaire));
+        $query = $this->db->query($request);
+        foreach ($query->result_array() as $row) {
+            array_push($tab, $row);
+        }
+    return $tab;
+    }
+
     public function getobjetbyid($idobjet){
         $tab = array();
         $request = "SELECT * from objet where idobjet = %s";
@@ -179,6 +192,17 @@ class Model_user extends CI_Model
     public function get_liste_objet_autres($idProprietaire) {
         $tab = array();
         $request = "SELECT * from  v_objet_image_categorie where idproprietaire != %s";
+        $request = sprintf($request,$this->db->escape($idProprietaire));
+        $query = $this->db->query($request);
+        foreach ($query->result_array() as $row) {
+            array_push($tab, $row);
+        }
+    return $tab;
+    }
+
+    public function get_liste_objet_autres_unique($idProprietaire) {
+        $tab = array();
+        $request = "SELECT * from  v_objet_image_categorie where idproprietaire != %s group by idobjet";
         $request = sprintf($request,$this->db->escape($idProprietaire));
         $query = $this->db->query($request);
         foreach ($query->result_array() as $row) {
