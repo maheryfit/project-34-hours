@@ -22,8 +22,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navcol-3">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link text-uppercase" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link text-uppercase" href="#">Gestion de catégories</a></li>
+                    <li class="nav-item"><a class="nav-link text-uppercase" href="<?= site_url("controlleur_user/vers_gestion_categorie");?>">Home</a></li>
                 </ul>
                 <a class="btn ms-md-2" id="discard" role="button" href="#">Déconnexion</a>
             </div>
