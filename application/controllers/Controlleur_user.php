@@ -480,7 +480,7 @@ class Controlleur_user extends CI_Controller {
         $moisfin = $this->input->post('moisfin');
         $dataliste['donneesstat'] = $this->model_user->getInscriptionBetween($annee, $moisdebut, $moisfin);
         $dataliste['title'] = "Interface suivi inscription";
-        $dataliste['pages'] = "suivi-inscription";
+        $dataliste['pages'] = "suivi-utilisateur";
         $this->load->view('pages-template-admin', $dataliste);
     }
 
@@ -492,7 +492,7 @@ class Controlleur_user extends CI_Controller {
         $moisfin = $this->input->post('moisfin');
         $dataliste['donneesstat'] = $this->model_user->getEchangeBetween($annee, $moisdebut, $moisfin);
         $dataliste['title'] = "Interface suivi inscription";
-        $dataliste['pages'] = "suivi-inscription";
+        $dataliste['pages'] = "suivi-echange";
         $this->load->view('pages-template-admin', $dataliste);
     }
 
