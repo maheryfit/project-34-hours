@@ -81,7 +81,7 @@ class Model_user extends CI_Model
         $request = sprintf($request,$this->db->escape($idobjet));
         $query = $this->db->query($request);
         $row = $query->row();
-    return $row->nom;
+    return $row->titre;
     }
 
     public function get_IdProprietaireObjById($idobjet) {

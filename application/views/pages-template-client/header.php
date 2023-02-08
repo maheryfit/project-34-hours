@@ -27,6 +27,7 @@
                     <li class="nav-item"><a class="nav-link text-uppercase" href="<?=site_url("controlleur_user/vers_proposition_echange");?>">Proposition d'échange</a></li>
                     <li class="nav-item"><a class="nav-link text-uppercase" href="<?=site_url("controlleur_user/vers_gestion_echange");?>">Gestion d'échange</a></li>
                     <li class="nav-item"><a class="nav-link text-uppercase" href="<?=site_url("controlleur_user/vers_liste_objet_autres");?>">Listes des objets</a></li>
+                    <li class="nav-item"><a class="nav-link text-uppercase" href="<?=site_url("controlleur_user/vers_recherche");?>">Rechercher</a></li>
                 </ul>
                 <a class="btn ms-md-2" id="discard" role="button" href="#">Déconnexion</a>
             </div>
