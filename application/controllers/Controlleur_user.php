@@ -281,7 +281,7 @@ class Controlleur_user extends CI_Controller {
 
         $dataobjet['title'] = "Interface proposition echange";
         // $dataliste['title'] = $iduseractuel;
-        $dataobjet['objetdesautres'] = $this->model_user->get_liste_objet_autres($iduseractuel);
+        $dataobjet['mesobjets'] = $this->model_user->getlistemesobjet($iduseractuel); //ho recuperena ao anaty drop down liste
         $dataobjet['objetcible'] = $this->model_user->getobjetimagebyid($idobjetcible);
         $dataobjet['pages'] = "proposition-echange";
 
@@ -404,7 +404,7 @@ class Controlleur_user extends CI_Controller {
     public function traitement_recherche()
     {
         $this->load->model('model_user');
-        
+
 
         $dataliste['titrerecherche'] = "titre recherche not found";
         $dataliste['categorierecherche'] = "categorie recherche not found";
