@@ -464,8 +464,6 @@ class Controlleur_user extends CI_Controller {
     public function vers_recherche()
     {
         $this->load->model('model_user');
-        $titrerecherche = $this->input->post('titrerecherche');
-        $categorierecherche = $this->input->post('categorierecherche');
         
         $dataliste['categories'] = $this->model_user->get_listCategories();
         $dataliste['title'] = "Interface recherche objet";
@@ -482,7 +480,7 @@ class Controlleur_user extends CI_Controller {
         $moisfin = $this->input->post('moisfin');
         $dataliste['donneesstat'] = $this->model_user->getInscriptionBetween($annee, $moisdebut, $moisfin);
         $dataliste['title'] = "Interface suivi inscription";
-        $dataliste['pages'] = "suivi-inscription";
+        $dataliste['pages'] = "suivi-utilisateur";
         $this->load->view('pages-template-admin', $dataliste);
     }
 
@@ -494,7 +492,7 @@ class Controlleur_user extends CI_Controller {
         $moisfin = $this->input->post('moisfin');
         $dataliste['donneesstat'] = $this->model_user->getEchangeBetween($annee, $moisdebut, $moisfin);
         $dataliste['title'] = "Interface suivi inscription";
-        $dataliste['pages'] = "suivi-inscription";
+        $dataliste['pages'] = "suivi-echange";
         $this->load->view('pages-template-admin', $dataliste);
     }
 
@@ -502,8 +500,9 @@ class Controlleur_user extends CI_Controller {
     {
         $this->load->model('model_user');
 
-        $titrerecherche = "titre recherche not found";
-        $categorierecherche = "categorie recherche not found";
+        $titrerecherche = $this->input->post('titrerecherche');
+        $categorierecherche = $this->input->post('categorierecherche');
+        
         $dataliste['objetdesautres'] = "recherche not good";
         if (isset($titrerecherche) && isset($categorierecherche))
         {
@@ -516,7 +515,7 @@ class Controlleur_user extends CI_Controller {
         $this->load->view('pages-template-admin', $dataliste);
     }
 
-    public function vers_historique_recherche()
+    public function vers_historique_echange()
     {
 
     }
