@@ -76,10 +76,10 @@ Interface admin : Update sy delete categorie mbola eritreretina sy atao am faran
 	. modele
 		. get_difference_prix_en_pourcentage($idmonproduit, $idproduit)
 		. get_objet_autres_pourcentage($idmonproduit, $pourcentage)
-		. traitement_echange_pourcentage($idobjetorigine, $idobjetcible)
-		. traitement_echange_multiple($reference)
+		. echange_pourcentage($idobjetorigine, $idobjetcible)
+		. echange_multiple($reference)
 	.controlleur
 		. vers_liste_objets_autres_pourcentage
 		. traitement_echange_pourcentage($idobjetorigine, $idobjetcible)
 		. traitement_echange_multiple($reference)
- 	
+ 		
