@@ -69,3 +69,5 @@ Interface admin : Update sy delete categorie mbola eritreretina sy atao am faran
 		. vers_proposition_echange() (efa misy)
 		. vers_stat_nbutilisateur()
 		. vers_stat_nbEchange()
+		. traitement_recherche()
+		. vers_historique_echange()
