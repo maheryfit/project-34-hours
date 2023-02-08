@@ -18,14 +18,12 @@
         <div class="col-6">
             <form action="#" class="text-center mx-auto col-6" method="post">
                 <div class="mb-4">
-                    <label for="choice">Choisir l'objet d'échange :</label>
+                    <label class="form-label" for="choice">Choisir l'objet d'échange :</label>
                     <select name="objet" class="form-select" id="choice" aria-label="Default select example">
                         <?php
-                            foreach ($objetdesautres as $objetdesautre) { ?>
-                                <option value="<?=$objetdesautre[""];?>"></option>
-                                <option value="<?=$objetdesautre[""];?>"></option>
-                                <option value="<?=$objetdesautre[""];?>"></option>      
-                            <? }
+                            foreach ($mesobjets as $mesobjet) { ?>
+                                <option value="<?=$mesobjet["idobjet"];?>"><?=$mesobjet["nom"];?></option>   
+                            <?php }
                         ?>
                     </select>
                 </div>

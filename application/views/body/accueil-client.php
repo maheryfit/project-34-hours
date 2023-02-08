@@ -6,10 +6,13 @@
         </div>
         <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
             <?php
-                foreach ($listeobjets as $listeobjet) { ?>
+                $id = "";
+                foreach ($listeobjets as $listeobjet) { 
+                    $id = $listeobjet['idobjet'];
+                ?>
                 <div class="col">
                     <div>
-                        <a href="">
+                        <a href="<?= site_url("controlleur_user/vers_fiche_unique_objet?idobjet=$id");?>">
                             <img class="rounded img-fluid d-block w-100 fit-cover" style="height: 350px;" src="<?= site_url($listeobjet["urlimage"]);?>">
                         </a>
                         <div class="py-4">
@@ -22,3 +25,4 @@
                 <?php }
             ?>
         </div>
+</div>

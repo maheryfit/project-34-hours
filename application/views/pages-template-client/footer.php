@@ -2,7 +2,8 @@
             <div class="container text-muted py-4 py-lg-5">
                 <ul class="list-inline">
                     <li class="list-inline-item me-4"><a class="link-secondary text-uppercase" href="<?=site_url("controlleur_user/vers_liste_mes_objet");?>">Home</a></li>
-                    <li class="list-inline-item me-4"><a class="link-secondary text-uppercase" href="<?=site_url("controlleur_user/vers_proposition_echange");?>">Gestion d'échange</a></li>
+                    <li class="list-inline-item me-4"><a class="link-secondary text-uppercase" href="<?=site_url("controlleur_user/vers_proposition_echange");?>">Proposition d'échange</a></li>
+                    <li class="list-inline-item me-4"><a class="link-secondary text-uppercase" href="<?=site_url("controlleur_user/vers_gestion_echange");?>">Gestion d'échange</a></li>
                     <li class="list-inline-item"><a class="link-secondary text-uppercase" href="<?=site_url("controlleur_user/vers_liste_objet_autres");?>">Listes des objets</a></li>
                 </ul>
                 <ul class="list-inline">

@@ -39,3 +39,8 @@ a:hover {
     background-color: var(--submit-hover);
     color: var(--white);
 }
+
+.section-scroll {
+    background-color: var(--white);
+    color: var(--secondary-color);
+}

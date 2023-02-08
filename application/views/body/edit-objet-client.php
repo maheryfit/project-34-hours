@@ -21,7 +21,7 @@
             </div>
         </div>
         <form class="mb-3 mx-auto col-6">
-            <label for="formFileMultiple" class="form-label"></label>
+            <label for="formFileMultiple" class="form-label">Ajouter une nouvelle photo :</label>
             <input name="picture" class="form-control" accept=".png, .jpg" type="file" id="formFileMultiple">
             <div class="mb-3"><button class="btn d-block w-100" type="submit">Ajouter</button></div>
         </form>
