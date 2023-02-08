@@ -16,10 +16,11 @@
             </div>
         </div>
         <div class="col-6">
-            <form action="#" class="text-center mx-auto col-6" method="post">
+            <form action="<?= site_url("controlleur_user/traitement_proposition_echange");?>" class="text-center mx-auto col-6" method="post">
                 <div class="mb-4">
+                    <input type="hidden" value="<?=$objetcible["idobjet"];?>;?>" name="objetcible">
                     <label class="form-label" for="choice">Choisir l'objet d'échange :</label>
-                    <select name="objet" class="form-select" id="choice" aria-label="Default select example">
+                    <select name="objetorigine" class="form-select" id="choice" aria-label="Default select example">
                         <?php
                             foreach ($mesobjets as $mesobjet) { ?>
                                 <option value="<?=$mesobjet["idobjet"];?>"><?=$mesobjet["nom"];?></option>   
