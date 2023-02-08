@@ -161,14 +161,7 @@ class Model_user extends CI_Model
     return $tab;
     }
 
-    public function getobjetbyidunique($idobjet){
-        $tab = array();
-        $request = "SELECT * from objet where idobjet = %s group by idobjet";
-        $request = sprintf($request, $this->db->escape($idobjet) );
-        $query = $this->db->query($request);
-        $row = $query->row();
-    return $row;
-    }
+    
 
     public function modifierObjetSimple($idobjet, $titre, $description, $prix){
         if($prix < 0) {
@@ -289,6 +282,15 @@ class Model_user extends CI_Model
             array_push($tab, $row);
         }
     return $tab;
+    }
+
+    public function getobjetimagebyidunique($idobjet){
+        $tab = array();
+        $request = "SELECT * from  v_objet_image_categorie where idobjet = %s group by idobjet";
+        $request = sprintf($request, $this->db->escape($idobjet) );
+        $query = $this->db->query($request);
+        $row = $query->row();
+    return $row;
     }
 
     public function rechercheObjet($motcle, $idcategorie) {
