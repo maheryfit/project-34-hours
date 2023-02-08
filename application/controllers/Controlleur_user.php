@@ -536,7 +536,7 @@ class Controlleur_user extends CI_Controller {
             $dataobjet['mesobjets'] = $this->model_user->getlistemesobjet($iduseractuel); //ho recuperena ao anaty drop down liste
             $dataobjet['mesobjetsunique'] = $this->model_user->getlistemesobjetunique($iduseractuel); //ho recuperena ao anaty drop down liste
             $dataobjet['objetcible'] = $this->model_user->getobjetimagebyidunique($idobjetcible);
-            $dataobjet['tablehistorique'] = $this->model_user->get_historiqueObjet($idobjetcible);
+            $dataobjet['tablehistorique'] = $this->model_user->get_liste_historique_avec_nom($idobjetcible);
             $dataobjet['pages'] = "proposition-echange";
     
             $this->load->view('pages-template-client', $dataobjet);
