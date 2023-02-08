@@ -310,7 +310,7 @@ class Model_user extends CI_Model
     return $tab;
     }
 
-    public function get_histroriqueObjet($idobjet) {
+    public function get_historiqueObjet($idobjet) {
         $tab = array();
         $request = "SELECT * from echange where ( idobjetorigine = %s or idobjetcible = %s ) and etat = 'confirme'";
         $request = sprintf($request, $this->db->escape($idobjet), $this->db->escape($idobjet));
@@ -319,6 +319,21 @@ class Model_user extends CI_Model
             array_push($tab, $row);
         }
     return $tab;
+    }
+
+    public function get_liste_historique_avec_nom($idproprioorigine){
+        $val = array();
+        $tab = $this->get_historiqueObjet($idproprioorigine);
+        for($i = 0; $i < count($tab); $i++) {
+            $val[$i]['idechange'] = $tab[$i]['idechange'];
+            $val[$i]['objetorigine'] = $this->get_NomObjById($tab[$i]['idobjetorigine']);
+            $val[$i]['objetcible'] = $this->get_NomObjById($tab[$i]['idobjetcible']);
+            $val[$i]['proprioorigine'] = $this->get_UtilisateurById($tab[$i]['idproprioorigine']);
+            $val[$i]['proprinouveau'] = $this->get_UtilisateurById($tab[$i]['idproprionouveau']);
+            $val[$i]['dateechange'] = $tab[$i]['dateechange'];
+            $val[$i]['etat'] = $tab[$i]['etat'];
+        }
+    return $val;
     }
 
     public function countEchange ($mois, $anne) {
@@ -382,6 +397,27 @@ class Model_user extends CI_Model
         }
     return $val;
     }
+
+    public function get_difference_prix_en_pourcentage($idmonproduit, $idproduit) {
+        $monproduit = $this->getobjetbyid($idmonproduit);
+        $autreproduit = $this->getobjetbyid($idproduit);
+        return  ($monproduit[0]['prix']/$autreproduit[0]['prix'])/100;
+    }
+
+    public function get_objet_autres_pourcentage($idmonproduit, $pourcentage) {
+        $tab = array();
+        $monproduit = $this->getobjetbyid($idmonproduit);
+        $prix = $monproduit[0]['prix'];
+        $request = "SELECT * from objet where %d = (SELECT prix/%d from objet)";
+        $request = sprintf($request, $pourcentage, $prix);
+        $query = $this->db->query($request);
+        foreach ($query->result_array() as $row) {
+            array_push($tab, $row);
+        }
+    return $tab;
+    }
+
+
 
 
 
