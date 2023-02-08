@@ -24,7 +24,7 @@ class Model_user extends CI_Model
 
     public function get_liste_mes_propositions($idproprioorigine){
         $tab = array();
-        $request = "SELECT * from echange where idproprioorigine = %s";
+        $request = "SELECT * from echange where idproprioorigine = %s and etat ='attente'";
         $request = sprintf($request,$this->db->escape($idproprioorigine));
         $query = $this->db->query($request);
         foreach ($query->result_array() as $row) {
@@ -33,10 +33,10 @@ class Model_user extends CI_Model
     return $tab;
     }
 
-    public function get_liste_propositions_autres($idproprionouveau){
+    public function get_liste_propositions_autres($idproprioorigine,$idproprionouveau){
         $tab = array();
-        $request = "SELECT * from echange where idproprionouveau = %s";
-        $request = sprintf($request,$this->db->escape($idproprionouveau));
+        $request = "SELECT * from echange where idproprionouveau = %s and etat ='attente' and idproprioorigine = %s";
+        $request = sprintf($request,$this->db->escape($idproprionouveau), $this->db->escape($idproprioorigine));
         $query = $this->db->query($request);
         foreach ($query->result_array() as $row) {
             array_push($tab, $row);
@@ -229,9 +229,9 @@ class Model_user extends CI_Model
 
     public function rechercheObjet($motcle, $idcategorie) {
         $tab = array();
-        $request = "SELECT * from objet  where nom like %s and idcategorie = %s";
+        $request = "SELECT * from objet  where titre like %s and idcategorie = %s";
         if($idcategorie == 0) {
-            $request = "SELECT * from objet  where nom like %s";
+            $request = "SELECT * from objet  where titre like %s";
             $request = sprintf($request, $this->db->escape($motcle));
         }
         else {
@@ -314,7 +314,7 @@ class Model_user extends CI_Model
         else {
             echo "mois debut infeerieur a mois fin";
         }
-        return $val;
+    return $val;
     }
 
 
