@@ -7,7 +7,7 @@ create table IF NOT EXISTS utilisateur
 	nom varchar(15) NOT NULL,
 	mail varchar(80) NOT NULL,
 	motdepasse varchar(80) NOT NULL,
-	isadmin int, -- 0 : non, 1 : oui
+	isadmin int,
     dateinscription date,
 	PRIMARY KEY (idutilisateur)
 ) ENGINE=InnoDB DEFAULT CHARSET="utf8";
@@ -87,7 +87,7 @@ create table IF NOT EXISTS echange
 	idproprioorigine int NOT NULL,
 	idproprionouveau int NOT NULL,
     dateechange date,
-	etat varchar(10), -- attente, annule, confirme
+	etat varchar(10),
 	PRIMARY KEY (idechange),
 	FOREIGN KEY (idobjetorigine) references objet(idobjet),
 	FOREIGN KEY (idobjetcible) references objet(idobjet),
@@ -111,7 +111,7 @@ create table IF NOT EXISTS sequence
 create table IF NOT EXISTS echange_multiple
 (
     idechange_multiple int,
-    reference int, --sequence
+    reference int,
     idobjetcible int,
     idobjetorigine int,
     idproprietairecible int,
